@@ -1,0 +1,14 @@
+{
+  "name": "FLUX — Kazakhstan, together",
+  "short_name": "FLUX",
+  "description": "Small-group journey concepts through Kazakhstan: Charyn Canyon, Kolsai Lakes, Burabay, Turkestan and Altyn-Emel.",
+  "start_url": "./index.html?lang=en",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f8f7f2",
+  "theme_color": "#20221f",
+  "lang": "en",
+  "icons": [
+    { "src": "favicon.png", "sizes": "128x128", "type": "image/png", "purpose": "any" }
+  ]
+}
