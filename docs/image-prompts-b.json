@@ -1,0 +1,22 @@
+[
+  {
+    "n": "03",
+    "prompt": "Minimal targeted edit to existing FLUX slide 03. Preserve exact approved photo of hikers and mountain lake, torn ivory paper lower area, exact white FLUX mountain/river logo, huge white heading 'Короткий тур внутри большой поездки', timeline, coral 03 bottom-right. This is a hypothesis, not a proven behaviour for all German visitors. Replace the timeline top label 'Поездка на 8–15 дней' with exact Russian 'Гипотеза: добавить тур к большой поездке' in clean smaller but readable dark bold text, same centered position above timeline. Keep all other labels 'Приезд', 'Возвращение', '2–4 дня', 'Тур FLUX'. No new footer, no added top/bottom dividers, no tiny left footnotes. Keep logo and visual style unchanged."
+  },
+  {
+    "n": "05",
+    "extras": [
+      "screen-tour-ru.png",
+      "screen-booking-ru.png"
+    ],
+    "prompt": "Edit existing FLUX slide 05, preserve exact cream paper brand, original FLUX mountain/river/coral sun logo upper-left, heading 'Бронирование' separate at upper-left, coral 05 bottom-right. The other two inputs are REAL Russian-language screenshots of the same Charyn pilot. Replace the two old English screenshots with those two actual supplied Russian screenshots. Left/back upright screen is the Charyn tour page; right/front upright screen is the Charyn booking page with canyon photo, 7–8 ноября 2026, price 55 000 ₸ per person, total110000 for2. Preserve the supplied screenshots and text faithfully, do not invent a Kolsai page, translations, fake data or UI fields. Structure: title entirely above screenshot band, screenshots aligned as an intentional two-screen composition with only about 10% width overlap, back screen peeks from left with tour title and canyon photo visible. Front checkout screen a little larger but do not cover title, logo or page number. Both upright, no rotations, no giant deep shadows, no pile of cards. Fit the entire front screenshot including confirm button; can crop peripheral whitespace, never cut essential controls. Do NOT add separate external caption about prepayment or steps, no arrows, no extra slogan. Original light paper texture background and generous outer margins. 16:9."
+  },
+  {
+    "n": "06",
+    "prompt": "Precise single-word change only to supplied FLUX slide 06. Preserve entire exact original layout, logo, cream paper texture, heading 'Как мы проверяем условия тура', two source documents left, coral contradiction bracket and arrow, dark corrected document on right and coral 06 bottom-right. Replace ONLY the central coral rounded label's word 'TripProof' with exact Russian word 'Проверка' in white bold type. Keep every other visual, all other text, dimensions and positions unchanged. Do not redesign. Do not add anything."
+  },
+  {
+    "n": "08",
+    "prompt": "Edit supplied FLUX final slide 08 while preserving the approved atmospheric Kazakh mountain lake/wooden porch/backpack photo, exact white FLUX mountain/river/coral sun logo, ivory paper travel-plan cards, coral route accents and coral 08 bottom-right. Keep large title 'План на 12 недель'. Recompose the content slightly to include team and measurable case objective without cramming. Directly below title use clear white line 'Цель: 30% иностранных туристов за 24 месяца'. Below that in a slightly smaller but still readable white two-line team area, exact text 'Хакназар — фронтенд, презентация' and 'Эмиль — бэкенд, ресерч'. These are main content in upper-middle, NOT tiny bottom-left footer. Give dark contrast behind text naturally by photo shading. Bottom half retains three paper cards connected by a subtle coral dotted path, with short exact labels: '1–2 недели' / '10 интервью'; '3–10 недели' / 'Разработка'; '11–12 недели' / 'Пилот'. Interviews are future plan, do not add quotes or claims already done. Keep image objects photographically coherent and leave adequate spacing. Remove old subheading 'Один маршрут. Один оператор.' to make room. All slide text Russian except FLUX. No QR code, no extra slogans, no horizontal header/footer lines. Full 16:9."
+  }
+]

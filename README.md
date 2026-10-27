@@ -1,43 +1,44 @@
-# FLUX — Kazakhstan travel concept
+# FLUX · Finalist prototype
 
-Bilingual (DE/EN) static prototype for a small-group travel product: trip pages, departures, a three-step demo checkout and a demo receipt email.
+Kazakhstan short-trip concept for German-speaking visitors. The DE/EN destination site is preserved; the complete Charyn pilot and operator workflow also have a Russian view for the final pitch.
 
-Prices, dates, guides, reviews and departures are illustrative. Checkout is a demo: no card is charged and no real booking is created. The receipt email is also a demo.
+Live Russian start: https://flux-kazakhstan.vercel.app/demo.html?lang=ru
 
-## Stack
+Operator: https://flux-kazakhstan.vercel.app/operator.html?lang=ru
 
-- Plain HTML, CSS and JavaScript — no build step.
-- `api/send-receipt.js` — Vercel serverless function for the demo receipt.
-- [Resend](https://resend.com) for email delivery (optional).
+## What works
 
-## Deploy on Vercel
+1. Structured departure: full price, inclusions, guide language and cancellation terms.
+2. Contradictory or incomplete fields block publication. Fix the sample transfer conflict, then publish a new version.
+3. A traveller books the published version. A stale checkout cannot confirm after conditions change.
+4. The demo booking retains its accepted terms snapshot. Download confirmation or request cancellation; old snapshots survive later publications.
 
-1. Import this repository at [vercel.com/new](https://vercel.com/new).
-2. Framework preset: **Other**. Build command and output directory: leave empty (the site is at the repository root).
-3. Optionally enable the demo receipt email:
-   - Create a Resend account and an API key with sending access.
-   - In Vercel → **Settings → Environment Variables**, add `RESEND_API_KEY`.
-   - For any recipient, verify a domain in Resend and set `RECEIPT_FROM=FLUX <receipts@your-domain>`.
-   - Redeploy. Environment variables only apply to new deployments.
-4. Without `RESEND_API_KEY`, checkout still works and shows a demo fallback instead of sending email.
+Pilot: Charyn, 7-8 November 2026, 55,000 KZT per person, eight guests maximum. Data are illustrative. Other routes remain concepts; their checkout directs to this pilot.
 
-> Before domain verification, Resend's default `onboarding@resend.dev` sender can only deliver to the email address that owns the Resend account.
+## Storage and payments
 
-## Structure
+The pilot uses localStorage in one browser. It has no shared database or operator authentication. No money is charged, no card details are collected, and no contact information is sent. Clearing browser storage clears local records. Cancellation requests do not complete refunds or release seats automatically.
 
-```text
-index.html, tours.html, booking.html, journal.html
-site.js, enhance.js, enhance.css, style.css
-api/send-receipt.js
-vercel.json
-assets/, fonts/
-```
+api/send-receipt.js is an older optional Vercel/Resend experiment; the finalist flow does not call it. Email delivery and live payments are not claimed as ready.
 
-## Local preview
+## Run locally, including offline
+
+No build step or external fonts are required.
 
 ```bash
-python3 -m http.server 3327
-# open http://127.0.0.1:3327/
+python3 -m http.server 3328 --bind 127.0.0.1
 ```
 
-The serverless email function runs only on Vercel.
+Open http://127.0.0.1:3328/demo.html?lang=ru . Use HTTP, not a file URL, so pages share the same storage origin. Keep operator and traveller views in the same browser.
+
+## Checks
+
+```bash
+node tests/proof-core.test.cjs
+```
+
+tests/browser.mjs requires Playwright with Chromium available. FLUX_NODE_MODULES optionally points to an installed node_modules directory, ending with /. FLUX_BASE_URL optionally selects the local or deployed URL. The test uses a temporary context, synthetic contact data and no POST requests.
+
+## Source
+
+proof-core.js holds the tested version/booking model. final-demo.js and final-demo.css render the pilot; site.js and enhance.js render the original destination pages. Images/fonts are local. docs/AI-USE.md records AI use and links to prompts. The 55,000 KZT financial model includes twelve months of support; historical Stage 1 figures should not be mixed with it.

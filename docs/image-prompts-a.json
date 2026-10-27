@@ -1,0 +1,14 @@
+[
+  {
+    "n": "02",
+    "prompt": "Edit the supplied FLUX slide 02, a 16:9 Russian hackathon slide. Preserve EXACT existing approved FLUX mountain/river/coral sun logo, ivory paper, charcoal heavy sans type and coral accents. Preserve composition of typography left, torn-edge Kazakhstan canyon photograph right and coral 02 bottom-right. Refine content so problem is clear without clutter. All text Russian, exact text: heading 'Условия тура — в переписке' across two lines with natural spacing, not merged letters. Under heading a single short sentence 'Цена, язык гида и включённые услуги требуют уточнения' in readable regular size. Keep large coral '87 257'. Beneath number exact 'частных въездов граждан Германии в 2025 году'. Beneath that adjacent to statistic, small but readable 'БНС РК · въезды, не уникальные туристы'. This number is national context, not validated demand. No map. No small bottom-left footnotes. No top or bottom horizontal divider lines. No new slogans, no English except FLUX. Spacious polished typography, no overlapping glyphs."
+  },
+  {
+    "n": "04",
+    "prompt": "Edit supplied approved FLUX slide 04. Keep exact original FLUX mountain/river/coral sun logo, ivory paper texture, charcoal heavy sans headings, coral number 04 bottom-right, single large dark landscape-shaped travel ticket, its canyon contour illustration and sun. Retain exact heading 'Что именно бронирует турист'. Replace tiny orange ticket label 'TripProof' with Russian 'Условия тура'. Keep vertical 'Чарын'. Ticket columns should be clean, spaced, with clear readable Russian text: 'Выезд' then '7–8 ноября'; 'Включено' then 'Трансфер, ночь,\\nгид и парк'; 'Версия условий' then 'Сохранена\\nс бронью'; last 'За человека' then coral '55 000 ₸'. Under date within same column small 'Демовыезд'. All labels fully visible, real Cyrillic, no swallowing letters. Keep the same design and exact content only, avoid decorative top/footer divider lines. No extra captions."
+  },
+  {
+    "n": "07",
+    "prompt": "Precisely edit this existing FLUX slide 07. Preserve all composition, ivory textured paper, exact FLUX logo, large heading 'Расходы и окупаемость', price ticket top-right reading 'Цена тура' / '55 000 ₸' / 'за человека', minimal faint topographic contours bottom-right, coral 07 bottom-right. Make only these economic updates: giant left coral number '7,425' instead of '6,975'; giant central charcoal number '15' instead of '14'; right coral '18' stays. Under left number use two compact clean lines 'млн ₸' and 'расходы проекта за год' so label is spacious and not squeezed; under 15 'месяцев' and smaller 'Базовый сценарий'; under 18 'месяцев' and smaller 'Клиентов на 30% меньше'. Keep visual rhythm, natural letter spacing, full readable glyphs. No 'Расчёт по модели' caption. No new table or footnote, no horizontal header/footer lines. This is a 16:9 Russian pitch slide."
+  }
+]

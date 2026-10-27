@@ -4,6 +4,7 @@
    magnetic buttons, self-drawing map, counters, film grain.
    ============================================================ */
 (() => {
+if(window.FluxDemo?.owned) return;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const fine   = matchMedia('(hover:hover) and (pointer:fine)').matches;
   const raf    = requestAnimationFrame;
