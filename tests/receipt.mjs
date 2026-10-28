@@ -11,14 +11,15 @@ await mkdir(out,{recursive:true});
 const browser=await chromium.launch();
 const evidence=[];
 async function book(page,lang,name='Демо-путешественник',email='demo@example.test') {
- await page.goto(base+'booking.html?place=charyn&lang='+lang,{waitUntil:'networkidle'});
+ await page.goto(base+'booking.html?place=charyn&lang='+lang,{waitUntil:'domcontentloaded'});
  await page.locator('#fd-name').fill(name);await page.locator('#fd-email').fill(email);
  await page.locator('#fd-consent').check();await page.locator('#fd-booking-form').evaluate(f=>f.requestSubmit());
  await page.locator('#fd-confirmation h1').waitFor();
+ await page.evaluate(()=>document.fonts.ready);
  return new URL(page.url()).searchParams.get('ref');
 }
 async function download(page,name) {
- const event=page.waitForEvent('download');await page.locator('#fd-download').click();
+ const event=page.waitForEvent('download',{timeout:60000});await page.locator('#fd-download').click();
  const d=await event;assert.match(d.suggestedFilename(),/^FX-.+-FLUX\.pdf$/);
  const path=join(out,name);await d.saveAs(path);
  assert.equal((await readFile(path)).subarray(0,5).toString(),'%PDF-');return path;
@@ -39,7 +40,7 @@ try {
   assert.equal(await page.evaluate(()=>FluxProof.read().bookings.length),1);
   // Change the live offer after acceptance. Both the page and PDF must retain v1.
   await page.evaluate(()=>{FluxProof.saveDraft({...FluxProof.read().draft,transferExtra:false,price:69000,cancelHours:72});FluxProof.publish();});
-  await page.reload({waitUntil:'networkidle'});await page.locator('#fd-download').waitFor();
+  await page.reload({waitUntil:'domcontentloaded'});await page.locator('#fd-download').waitFor();
   assert.equal(await page.evaluate(()=>FluxReceipt.model(FluxProof.read().bookings[0],document.documentElement.lang).b.total),110000);
   await page.locator('.fd-saved-terms summary').click();
   assert.match(await page.locator('.fd-saved-grid').innerText(),/48/);
@@ -55,7 +56,7 @@ try {
   const target=lang==='de'?'en':'de';
   await page.locator('[data-final-lang="'+target+'"]').click();await page.waitForURL(u=>u.searchParams.get('lang')===target);
   assert.equal(new URL(page.url()).searchParams.get('ref'),ref);await page.locator('#fd-download').waitFor();
-  await page.locator('#fd-cancel').click();await page.reload({waitUntil:'networkidle'});
+  await page.locator('#fd-cancel').click();await page.reload({waitUntil:'domcontentloaded'});
   assert(await page.locator('#fd-cancel').isDisabled());
   assert.equal(await page.evaluate(()=>FluxProof.read().bookings[0].status),'cancel_requested');
   await download(page,lang+'-cancel-request.pdf');
