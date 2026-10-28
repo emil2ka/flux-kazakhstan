@@ -100,7 +100,7 @@
       q('#op-issues').innerHTML = errors.map(e => `<li>${errorText(e)}</li>`).join('');
       q('#op-publish').disabled = errors.length > 0;
       q('#op-published').textContent = tr('Опубликована версия', 'Published version', 'Veröffentlichte Version') + ' ' + v.number + ' · ' + money(v.departure.price);
-      q('#op-bookings').innerHTML = state.bookings.length ? state.bookings.map(b => `<article class="fd-booking-row"><strong>${esc(b.ref)}</strong><span>${esc(b.name)} · ${b.guests} · ${money(b.total)}</span><span>${tr('Принятая версия', 'Accepted version', 'Akzeptierte Version')} ${b.termsSnapshot.number}</span><span>${b.status === 'cancel_requested' ? tr('Отмена запрошена', 'Cancellation requested', 'Stornierung angefragt') : tr('Демобронь', 'Demo booking', 'Demobuchung')}</span></article>`).join('') : `<p>${tr('Пока нет. Создайте демобронь со стороны туриста.', 'No bookings yet. Create one from the traveller view.', 'Noch keine Buchungen. Erstelle eine in der Reisendenansicht.')}</p>`;
+      q('#op-bookings').innerHTML = state.bookings.length ? state.bookings.map(b => `<article class="fd-booking-row"><a href="${bookingURL()}&ref=${encodeURIComponent(b.ref)}"><strong>${esc(b.ref)}</strong></a><span>${esc(b.name)} · ${b.guests} · ${money(b.total)}</span><span>${tr('Принятая версия', 'Accepted version', 'Akzeptierte Version')} ${b.termsSnapshot.number}</span><span>${b.status === 'cancel_requested' ? tr('Отмена запрошена', 'Cancellation requested', 'Stornierung angefragt') : tr('Демобронь', 'Demo booking', 'Demobuchung')}</span></article>`).join('') : `<p>${tr('Пока нет. Создайте демобронь со стороны туриста.', 'No bookings yet. Create one from the traveller view.', 'Noch keine Buchungen. Erstelle eine in der Reisendenansicht.')}</p>`;
     };
     q('#fd-draft').addEventListener('submit', e => e.preventDefault());
     q('#fd-draft').addEventListener('change', () => {
@@ -111,6 +111,35 @@
     q('#op-publish').addEventListener('click', () => { try { F.publish(); render(); } catch (e) { q('#op-status').textContent = errorText(e.message); } });
     window.addEventListener('storage', e => { if (e.key === F.KEY) { sync(); render(); } });
     sync(); render();
+  }
+  function showConfirmation(bookingRecord) {
+    let receipt=bookingRecord;
+    const R=window.FluxReceipt, panel=q('#fd-confirmation');
+    panel.innerHTML=R.markup(receipt,lang);panel.hidden=false;
+    q('#fd-checkout-grid')?.remove();
+    document.body.classList.add('fd-confirming');
+    const url=new URL(location.href);url.searchParams.set('ref',receipt.ref);history.replaceState(null,'',url);
+    q('#fd-download').addEventListener('click',async()=>{
+      const button=q('#fd-download'), label=button.querySelector('span'), state=q('#fd-download-status');
+      const l=R.model(receipt,lang).labels;
+      button.disabled=true;button.setAttribute('aria-busy','true');label.textContent=l.preparing;state.textContent='';
+      try {await R.download(receipt,lang);}catch(error){state.textContent=l.retry;}
+      finally {button.disabled=false;button.removeAttribute('aria-busy');label.textContent=l.download;}
+    });
+    q('#fd-cancel').addEventListener('click',()=>{
+      try {
+        receipt=F.cancel(receipt.ref);
+        const r=R.model(receipt,lang);
+        q('#fd-cancel-status').textContent=r.labels.cancelled;q('#fd-cancel').disabled=true;
+        q('#fd-receipt-state').innerHTML='<span aria-hidden="true">✓</span>'+esc(r.state);
+      } catch(error) {q('#fd-cancel-status').textContent=errorText(error.message);}
+    });
+    window.scrollTo({top:0,behavior:'instant'});
+    q('#receipt-heading').focus({preventScroll:true});
+  }
+  if(page==='booking'&&params.get('place')==='charyn'&&params.get('ref')) {
+    const saved=F.read().bookings.find(b=>b.ref===params.get('ref'));
+    if(saved)showConfirmation(saved);
   }
   if (q('#fd-booking-form')) {
     const acceptedVersion = F.published();
@@ -123,15 +152,7 @@
       e.preventDefault();
       try {
         const b = F.book({ versionId: acceptedVersion.id, guests: Number(q('#fd-guests').value), guideLanguage: q('#fd-guide').value, name: q('#fd-name').value, email: q('#fd-email').value, accepted: q('#fd-consent').checked });
-        q('#fd-checkout-grid').hidden = true;
-        const panel = q('#fd-confirmation'); panel.hidden = false;
-        panel.innerHTML = `<section class="fd-success"><p class="eyebrow">${tr('Демонстрационное подтверждение', 'Demo confirmation', 'Demobestätigung')}</p><h1>${tr('Условия сохранены', 'Your terms are saved', 'Deine Bedingungen sind gespeichert')}</h1><p>${esc(b.ref)} · ${routeName} · ${dateLabel}</p><h2>${money(b.total)}</h2><p>${tr('Версия условий', 'Terms version', 'Bedingungsversion')} ${b.termsSnapshot.number} · ${tr('Денег списано: 0 ₸', 'Money charged: 0 KZT', 'Abgebucht: 0 KZT')}</p><p>${tr('Это локальная демобронь. Она доступна в этом браузере; реальная поездка не оформлена.', 'This is a local demo booking in this browser, not a real trip reservation.', 'Dies ist eine lokale Demobuchung in diesem Browser, keine echte Reisebuchung.')}</p><div class="fd-actions"><button id="fd-download" class="button button-dark" type="button">${tr('Скачать подтверждение', 'Download confirmation', 'Bestätigung herunterladen')}</button><button id="fd-cancel" class="fd-text-button" type="button">${tr('Запросить отмену', 'Request cancellation', 'Stornierung anfragen')}</button></div><p id="fd-cancel-status" role="status"></p></section>`;
-        q('#fd-download').addEventListener('click', () => {
-          const text = ['FLUX', tr('Демобронь. Деньги не списаны.', 'Demo booking. No money charged.', 'Demobuchung. Kein Geld abgebucht.'), b.ref, routeName, dateLabel, tr('Гид', 'Guide', 'Guide') + ': ' + guideName(b.guideLanguage), tr('Путешественников', 'Travellers', 'Reisende') + ': ' + b.guests, money(b.total), tr('Предоплата по модели', 'Model deposit', 'Modellanzahlung') + ': ' + money(b.deposit), tr('Версия условий', 'Terms version', 'Bedingungsversion') + ': ' + b.termsVersionId, ...included(), tr('Встреча: 08:00, гостиница «Казахстан», Достык, 52, Алматы.', 'Meeting:08:00, Kazakhstan Hotel,52Dostyk Ave,Almaty.', 'Treffen:08:00,Hotel Kazakhstan,Dostyk52,Almaty.'), cancellation(b.termsSnapshot), tr('Принято', 'Accepted', 'Akzeptiert') + ': ' + b.acceptedAt].join('\n');
-          const blob = new Blob([text], { type: 'text/plain;charset=utf-8' }), u = URL.createObjectURL(blob), a = document.createElement('a'); a.href = u; a.download = b.ref + '.txt'; a.click(); setTimeout(() => URL.revokeObjectURL(u), 1000);
-        });
-        q('#fd-cancel').addEventListener('click', () => { F.cancel(b.ref); q('#fd-cancel-status').textContent = tr('Запрос сохранён. Возврат денег не выполнялся: это демо.', 'Request saved. No refund was processed: this is a demo.', 'Anfrage gespeichert. Keine Erstattung ausgeführt: Dies ist eine Demo.'); q('#fd-cancel').disabled = true; });
-        window.scrollTo({ top: 0, behavior: 'instant' });
+        showConfirmation(b);
       } catch (err) { q('#fd-error').textContent = errorText(err.message); }
     });
   }

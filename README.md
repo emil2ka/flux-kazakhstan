@@ -13,7 +13,11 @@ Operator: https://flux-kazakhstan.vercel.app/operator.html?lang=ru
 1. Structured departure: full price, inclusions, guide language and cancellation terms.
 2. Contradictory or incomplete fields block publication. Fix the sample transfer conflict, then publish a new version.
 3. A traveller books the published version. A stale checkout cannot confirm after conditions change.
-4. The demo booking retains its accepted terms snapshot. Download confirmation or request cancellation; old snapshots survive later publications.
+4. The demo booking retains its accepted terms snapshot. Its confirmation is a responsive travel pass with a Charyn photograph, traveller details and model payment breakdown. Download a styled two-page PDF (ticket + saved terms) or request cancellation; old snapshots survive later publications.
+
+Confirmation links use a local booking reference. Reloading or switching RU / DE / EN preserves the confirmation in the same browser. Operator booking references open the saved confirmation. A cancellation request persists on reload and remains a request, not a completed refund.
+
+The PDF is generated locally on demand, including embedded fonts for Cyrillic, German and the tenge symbol. It does not send contact information to a server. `vendor/DEPENDENCIES.json` records the pinned jsPDF build and Adobe font revisions; MIT/OFL licenses are included. No CDN or internet connection is needed when the site is served locally.
 
 Pilot: Charyn, 7-8 November 2026, 55,000 KZT per person, eight guests maximum. Data are illustrative. Other routes remain concepts; their checkout directs to this pilot.
 
@@ -40,6 +44,8 @@ node tests/proof-core.test.cjs
 ```
 
 tests/browser.mjs requires Playwright with Chromium available. FLUX_NODE_MODULES optionally points to an installed node_modules directory, ending with /. FLUX_BASE_URL optionally selects the local or deployed URL. The test uses a temporary context, synthetic contact data and no POST requests.
+
+`tests/receipt.mjs` checks PDF downloads in RU/DE/EN, 320-1440 px confirmation layouts, accepted snapshot preservation after a price/policy change, reload/language/cancellation persistence, local-only assets, failed-download retry and long contact fields. `FLUX_RECEIPT_OUT` chooses the output directory for its synthetic PDFs and screenshots.
 
 ## Source
 

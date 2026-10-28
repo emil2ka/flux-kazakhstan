@@ -20,7 +20,7 @@ try {
  await page.locator('#fd-confirmation h1').waitFor();
  assert((await page.locator('#fd-confirmation').innerText()).includes('Денег списано: 0'));
  const download=page.waitForEvent('download');await page.locator('#fd-download').click();
- assert.match((await download).suggestedFilename(),/^FX-.+\.txt$/);
+ assert.match((await download).suggestedFilename(),/^FX-.+-FLUX\.pdf$/);
  await page.locator('#fd-cancel').click();
  await page.goto(base+'operator.html?lang=ru',{waitUntil:'domcontentloaded'});
  assert((await page.locator('#op-bookings').innerText()).includes('Отмена запрошена'));
