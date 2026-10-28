@@ -14,14 +14,15 @@ async function book(page,lang,name='Демо-путешественник',email
  await page.goto(base+'booking.html?place=charyn&lang='+lang,{waitUntil:'domcontentloaded'});
  assert.equal(await page.locator('#fd-guests').inputValue(),'1');
  await page.locator('#fd-guests').fill('2');
+ await page.locator('#fd-passenger-2').fill(lang==='de'?'Anna Müller':lang==='ru'?'Второй турист':'Second Traveller');
  await page.locator('#fd-name').fill(name);await page.locator('#fd-email').fill(email);
  await page.locator('#fd-consent').check();await page.locator('#fd-booking-form').evaluate(f=>f.requestSubmit());
  await page.locator('#fd-confirmation h1').waitFor();
  await page.evaluate(()=>document.fonts.ready);
  return new URL(page.url()).searchParams.get('ref');
 }
-async function download(page,name) {
- const event=page.waitForEvent('download',{timeout:60000});await page.locator('#fd-download').click();
+async function download(page,name,selector='#fd-download') {
+ const event=page.waitForEvent('download',{timeout:60000});await page.locator(selector).click();
  const d=await event;assert.match(d.suggestedFilename(),/^FX-.+-FLUX\.pdf$/);
  const path=join(out,name);await d.saveAs(path);
  assert.equal((await readFile(path)).subarray(0,5).toString(),'%PDF-');return path;
@@ -53,6 +54,9 @@ try {
    if(width===1440||width===390)await page.screenshot({path:join(out,lang+'-'+width+'.png'),fullPage:true});
   }
   await download(page,lang+'.pdf');
+  await download(page,lang+'-person-1.pdf','[data-ticket-download="0"]');
+  await download(page,lang+'-person-2.pdf','[data-ticket-download="1"]');
+  assert.deepEqual(await page.evaluate(()=>[0,1].map(i=>{const r=FluxReceipt.model(FluxProof.read().bookings[0],document.documentElement.lang,i);return [r.b.total,r.b.deposit,r.b.balance,r.b.guests]})),[[89000,17800,71200,1],[89000,17800,71200,1]]);
   const old=await page.evaluate(()=>FluxProof.read().bookings[0]);
   assert.equal(old.termsSnapshot.number,1);assert.equal(old.termsSnapshot.departure.cancelHours,48);
   const target=lang==='de'?'en':'de';
@@ -64,7 +68,7 @@ try {
   await download(page,lang+'-cancel-request.pdf');
   assert.equal(await page.evaluate(()=>FluxProof.read().bookings[0].termsSnapshot.number),1);
   assert.deepEqual(errors,[]);assert(requests.every(u=>u.startsWith(new URL(base).origin)));
-  evidence.push({lang,ref,acceptedVersion:old.termsVersionId,name:old.name,total:old.total,cancelHours:48,pagesExpected:2});
+  evidence.push({lang,ref,acceptedVersion:old.termsVersionId,name:old.name,total:old.total,cancelHours:48,pagesExpected:4});
   await context.close();
  }
  // Failed font loading must leave the booking intact and allow a retry.

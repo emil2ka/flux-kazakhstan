@@ -11,13 +11,13 @@ Live Russian start: https://flux-kazakhstan.vercel.app/demo.html?lang=ru
 1. Trip itinerary, full price, inclusions, guide language and cancellation terms are visible before booking.
 2. A traveller books directly from the trip page, without an operator check or publication step.
 3. The demo booking keeps the trip details accepted at checkout. Its confirmation is a responsive travel pass with a Charyn photograph, traveller details and model payment breakdown.
-4. Download a styled two-page PDF or request cancellation. The saved trip details remain attached to the booking.
+4. Enter the full name of each traveller. One booking has one contact email and a unique named ticket per traveller. Download one two-page ticket or all tickets in one PDF (two pages per traveller), or request cancellation of the whole booking. The saved trip details remain attached to the booking.
 
 Confirmation links use a local booking reference. Reloading or switching RU / DE / EN preserves the confirmation in the same browser. A cancellation request persists on reload and remains a request, not a completed refund. The removed operator URL redirects to the Charyn trip so older links remain usable.
 
 The PDF uses two A4 landscape pages: a photo travel pass with a dark tear-off stub, then saved terms in two columns with a separate contact strip. The web confirmation keeps its existing layout. The PDF is generated locally on demand, including embedded fonts for Cyrillic, German and the tenge symbol. It does not send contact information to a server. `vendor/DEPENDENCIES.json` records the pinned jsPDF build and Adobe font revisions; MIT/OFL licenses are included. No CDN or internet connection is needed when the site is served locally.
 
-Checkout starts with one traveller. The total follows the number selected; existing bookings keep the price accepted at confirmation. Guides conduct the tour in English only.
+Checkout starts with one traveller. Changing the count adds or removes passenger-name fields while preserving entered names. Every traveller must have a name before confirmation. The booking total follows the number selected; existing bookings keep the price accepted at confirmation. Guides conduct the tour in English only.
 
 Pilot: Charyn, 7-8 November 2026, 89,000 KZT per person, English-speaking guide, eight guests maximum. Data are illustrative. Other routes remain concepts; their checkout directs to this pilot.
 
@@ -45,7 +45,9 @@ node tests/proof-core.test.cjs
 
 tests/browser.mjs requires Playwright with Chromium available. FLUX_NODE_MODULES optionally points to an installed node_modules directory, ending with /. FLUX_BASE_URL optionally selects the local or deployed URL. The test uses a temporary context, synthetic contact data and no POST requests.
 
-`tests/receipt.mjs` checks PDF downloads in RU/DE/EN, 320-1440 px confirmation layouts, accepted snapshot preservation after a price/policy change, reload/language/cancellation persistence, local-only assets, failed-download retry and long contact fields. `FLUX_RECEIPT_OUT` chooses the output directory for its synthetic PDFs and screenshots.
+`tests/passengers.mjs` checks required names, 1/2/3/8-person groups, preserved inputs, unique ticket numbers, per-person amounts, legacy group receipts and responsive layouts.
+
+`tests/receipt.mjs` checks named and combined PDF downloads in RU/DE/EN, 320-1440 px confirmation layouts, accepted snapshot preservation after a price/policy change, reload/language/cancellation persistence, local-only assets, failed-download retry and long contact fields. `FLUX_RECEIPT_OUT` chooses the output directory for its synthetic PDFs and screenshots.
 
 ## Source
 

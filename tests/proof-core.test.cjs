@@ -4,12 +4,20 @@ const memory = () => { const map=new Map();return {getItem:k=>map.get(k),setItem
 const s=memory();
 assert.equal(F.publish,undefined);assert.equal(F.saveDraft,undefined);assert.equal(F.check,undefined);
 const v=F.published(s);assert.equal(v.departure.price,89000);
-const input={versionId:v.id,guests:2,guideLanguage:'en',name:'Demo Guest',email:'demo@example.test',accepted:true};
+const input={versionId:v.id,guests:2,guideLanguage:'en',name:'Demo Guest',passengers:['Demo Guest','Second Guest'],email:'demo@example.test',accepted:true};
 assert.throws(()=>F.book({...input,accepted:false},s),/consent/);
 assert.throws(()=>F.book({...input,guests:9},s),/seats/);
 assert.throws(()=>F.book({...input,guideLanguage:'fr'},s),/language/);
 assert.throws(()=>F.book({...input,guideLanguage:'de'},s),/language/);
+assert.throws(()=>F.book({...input,passengers:undefined},s),/passengers/);
+assert.throws(()=>F.book({...input,passengers:['Demo Guest','   ']},s),/passengers/);
+assert.throws(()=>F.book({...input,passengers:['Demo Guest']},s),/passengers/);
 const booking=F.book(input,s);
+assert.deepEqual(booking.passengers.map(p=>p.name),['Demo Guest','Second Guest']);
+assert.equal(booking.passengers[0].ticketId,booking.ref+'-01');
+assert.equal(booking.passengers[1].ticketId,booking.ref+'-02');
+booking.passengers[1].name='Changed outside storage';
+assert.equal(F.read(s).bookings[0].passengers[1].name,'Second Guest');
 assert.deepEqual([booking.total,booking.deposit,booking.balance,booking.paidAmount],[178000,35600,142400,0]);
 assert.equal(F.remaining(s),6);
 // A fixture changes the future offer; there is no operator/publication API.

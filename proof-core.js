@@ -64,12 +64,17 @@
     const name = String(input.name || '').trim().slice(0, 100);
     const email = String(input.email || '').trim().slice(0, 160);
     if (!name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new Error('contact');
+    const passengerNames = Array.isArray(input.passengers)
+      ? input.passengers.map(p => String(typeof p === 'string' ? p : p?.name || '').trim())
+      : guests === 1 ? [name] : [];
+    if (passengerNames.length !== guests || passengerNames.some(n => !n || n.length > 100)) throw new Error('passengers');
     if (!input.accepted) throw new Error('consent');
     let ref;
     do { ref = 'FX-' + Math.random().toString(36).slice(2, 7).toUpperCase().padEnd(5, '0'); } while (state.bookings.some(b => b.ref === ref));
     const total = guests * version.departure.price;
     const booking = {
       ref, name, email, guests, guideLanguage: input.guideLanguage,
+      passengers: passengerNames.map((name, index) => ({ name, ticketId: ref + '-' + String(index + 1).padStart(2, '0') })),
       status: 'demo_confirmed', paymentMode: 'simulation', paidAmount: 0,
       total, deposit: Math.round(total * .2), balance: total - Math.round(total * .2),
       acceptedAt: new Date().toISOString(), termsVersionId: version.id,
