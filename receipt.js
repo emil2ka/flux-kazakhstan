@@ -52,7 +52,7 @@
     const inclusions = [
       d.transfer === 'included' && t('Трансфер из Алматы и обратно','Return transfer from Almaty','Hin- und Rücktransfer ab Almaty'),
       d.accommodation === 'included' && t('Одна ночь в гостевом доме','One night in a guesthouse','Eine Nacht in einer Pension'),
-      t('Гид на выбранном языке','Guide in your selected language','Guide in der gewählten Sprache'),
+      b.guideLanguage==='en' ? t('Англоязычный гид','English-speaking guide','Englischsprachiger Guide') : t('Гид на языке брони','Guide in the booked language','Guide in der gebuchten Sprache'),
       d.park === 'included' && t('Вход в национальный парк','National park entry','Nationalparkeintritt'),
       d.meals === 'included' && t('Два обеда, ужин и завтрак','Two lunches, dinner and breakfast','Zwei Mittagessen, Abendessen und Frühstück'),
     ].filter(Boolean);

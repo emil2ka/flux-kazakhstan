@@ -6,17 +6,19 @@
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   'use strict';
   const KEY = 'flux-final-demo-v1';
+  const REVISION = 'pilot-89000-en-20261028';
+  const VERSION_ID = 'CH-2026-11-07-89000-en-v1';
   const clone = value => JSON.parse(JSON.stringify(value));
   const DEFAULT = {
     id: 'charyn-2026-11-07', tour: 'charyn', start: '2026-11-07', end: '2026-11-08',
-    price: 55000, capacity: 8, languages: ['de', 'en'], transfer: 'included',
+    price: 89000, capacity: 8, languages: ['en'], transfer: 'included',
     transferExtra: false, accommodation: 'included', park: 'included', meals: 'included',
     cancelHours: 48, meeting: 'Almaty', currency: 'KZT'
   };
   const initial = () => ({
-    schema: 1,
-    activeVersion: 'CH-2026-11-07-v1',
-    versions: [{ id: 'CH-2026-11-07-v1', number: 1, publishedAt: '2026-10-27T00:00:00Z', departure: clone(DEFAULT) }],
+    schema: 1, catalogRevision: REVISION,
+    activeVersion: VERSION_ID,
+    versions: [{ id: VERSION_ID, number: 1, publishedAt: '2026-10-28T00:00:00Z', departure: clone(DEFAULT) }],
     bookings: []
   });
   function storage(store) { return store || (typeof localStorage !== 'undefined' ? localStorage : null); }
@@ -28,6 +30,12 @@
       if (!raw) return initial();
       const value = JSON.parse(raw);
       if (value.schema !== 1 || !Array.isArray(value.versions) || !Array.isArray(value.bookings)) return initial();
+      // Keep existing bookings and their accepted prices; only refresh the current offer.
+      if (value.catalogRevision !== REVISION) {
+        const current=initial().versions[0];
+        if (!value.versions.some(v=>v.id===current.id)) value.versions.push(current);
+        value.activeVersion=current.id;value.catalogRevision=REVISION;
+      }
       return value;
     } catch (_) { return initial(); }
   }

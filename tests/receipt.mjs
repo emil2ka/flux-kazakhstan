@@ -12,6 +12,8 @@ const browser=await chromium.launch();
 const evidence=[];
 async function book(page,lang,name='Демо-путешественник',email='demo@example.test') {
  await page.goto(base+'booking.html?place=charyn&lang='+lang,{waitUntil:'domcontentloaded'});
+ assert.equal(await page.locator('#fd-guests').inputValue(),'1');
+ await page.locator('#fd-guests').fill('2');
  await page.locator('#fd-name').fill(name);await page.locator('#fd-email').fill(email);
  await page.locator('#fd-consent').check();await page.locator('#fd-booking-form').evaluate(f=>f.requestSubmit());
  await page.locator('#fd-confirmation h1').waitFor();
@@ -41,7 +43,7 @@ try {
   // Change the live offer after acceptance. Both the page and PDF must retain v1.
   await page.evaluate(()=>{const state=FluxProof.read(),old=FluxProof.published();const next={...old,id:'CH-2026-11-07-v2',number:2,departure:{...old.departure,price:69000,cancelHours:72}};state.versions.push(next);state.activeVersion=next.id;localStorage.setItem(FluxProof.KEY,JSON.stringify(state));});
   await page.reload({waitUntil:'domcontentloaded'});await page.locator('#fd-download').waitFor();
-  assert.equal(await page.evaluate(()=>FluxReceipt.model(FluxProof.read().bookings[0],document.documentElement.lang).b.total),110000);
+  assert.equal(await page.evaluate(()=>FluxReceipt.model(FluxProof.read().bookings[0],document.documentElement.lang).b.total),178000);
   await page.locator('.fd-saved-terms summary').click();
   assert.match(await page.locator('.fd-saved-grid').innerText(),/48/);
   await page.locator('.fd-saved-terms summary').click();

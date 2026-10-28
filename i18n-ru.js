@@ -204,8 +204,6 @@ window.FluxLocale = {
     "Almaty, Astana or Turkestan — shown on every trip.": "Из Алматы, Астаны или Туркестана — город указан в каждом туре.",
     "Can I travel on my own?": "Можно поехать одному?",
     "Yes. Choose one traveller in the planner.": "Да. Укажите одного путешественника в планировщике.",
-    "Is there an English- or German-speaking guide?": "Есть гиды, говорящие по-английски или по-немецки?",
-    "Choose it in the planner; it is confirmed with the departure.": "Выберите язык в планировщике; оператор подтвердит его для конкретного выезда.",
     "What is included, and can I cancel?": "Что входит в цену и можно ли отменить поездку?",
     "Each trip lists Included, Optional extras and Needs confirmation. Cancellation terms are agreed before payment.": "В каждом туре есть включённые услуги, опции и условия для уточнения. Правила отмены согласовываются до оплаты.",
     "A few things<br> before you go.": "Перед<br>поездкой.",
@@ -363,7 +361,9 @@ window.FluxLocale = {
     "This demo stores the request in this browser.": "Демозаявка хранится в этом браузере.",
     "Request saved in this browser. No real trip has been reserved.": "Заявка сохранена в этом браузере. Реальная поездка не оформлена.",
     "Demo checkout. No card is charged. Your booking is saved in this browser.": "Демооформление без списаний. Бронь сохранится в этом браузере.",
-    "Your demo booking is saved in this browser. No money has been charged.": "Демобронь сохранена в этом браузере. Деньги не списаны."
+    "Your demo booking is saved in this browser. No money has been charged.": "Демобронь сохранена в этом браузере. Деньги не списаны.",
+    "What language does the guide speak?": "На каком языке говорит гид?",
+    "Our tours are guided in English. The website is available in Russian, German and English.": "Гиды проводят экскурсии на английском. Сайт доступен на русском, немецком и английском."
   },
   "programs": {
     "kolsai": [

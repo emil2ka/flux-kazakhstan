@@ -17,7 +17,9 @@ Confirmation links use a local booking reference. Reloading or switching RU / DE
 
 The PDF uses two A4 landscape pages: a photo travel pass with a dark tear-off stub, then saved terms in two columns with a separate contact strip. The web confirmation keeps its existing layout. The PDF is generated locally on demand, including embedded fonts for Cyrillic, German and the tenge symbol. It does not send contact information to a server. `vendor/DEPENDENCIES.json` records the pinned jsPDF build and Adobe font revisions; MIT/OFL licenses are included. No CDN or internet connection is needed when the site is served locally.
 
-Pilot: Charyn, 7-8 November 2026, 55,000 KZT per person, eight guests maximum. Data are illustrative. Other routes remain concepts; their checkout directs to this pilot.
+Checkout starts with one traveller. The total follows the number selected; existing bookings keep the price accepted at confirmation. Guides conduct the tour in English only.
+
+Pilot: Charyn, 7-8 November 2026, 89,000 KZT per person, English-speaking guide, eight guests maximum. Data are illustrative. Other routes remain concepts; their checkout directs to this pilot.
 
 ## Storage and payments
 
@@ -47,8 +49,10 @@ tests/browser.mjs requires Playwright with Chromium available. FLUX_NODE_MODULES
 
 ## Source
 
-proof-core.js holds the local booking model and saved trip details. final-demo.js and final-demo.css render the pilot; site.js and enhance.js render the original destination pages. Images/fonts are local. docs/AI-USE.md records AI use and links to prompts. The 55,000 KZT financial model includes twelve months of support; historical Stage 1 figures should not be mixed with it.
+proof-core.js holds the local booking model and saved trip details. final-demo.js and final-demo.css render the pilot; site.js and enhance.js render the original destination pages. Images/fonts are local. docs/AI-USE.md records AI use and links to prompts. The 89,000 KZT model includes twelve months of support, 198 first-year guests and 33 departures; historical Stage 1 figures should not be mixed with it.
 
 ## Russian locale
 
 Edit locales/ru.json and run python3 scripts/build-locales.py to regenerate the offline i18n-ru.js. Full Russian checks: node tests/russian.mjs (Playwright required). The dictionary covers 363 interface strings and all five itineraries.
+
+Financial plan: KZT 7.0731m project expenses plus KZT 12.210m trip execution = KZT 19.2831m first-year total. Payback month 14 / 18. The downside assumes fewer departures with unchanged marketing; keeping the original calendar does not pay back within 24 months. Vehicle/driver, guide and per-guest costs are planning estimates, not supplier quotations.
