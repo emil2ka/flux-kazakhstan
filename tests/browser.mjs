@@ -11,9 +11,10 @@ page.on('pageerror',e=>errors.push(e.message));
 page.on('request',r=>{if(r.method()==='POST')posts++;});
 try {
  await page.goto(base+'operator.html?lang=ru',{waitUntil:'domcontentloaded'});
- assert(await page.locator('#op-publish').isDisabled());
- await page.locator('#op-fix').click();await page.locator('#op-publish').click();await page.reload();
- assert((await page.locator('#op-published').innerText()).includes('2'));
+ await page.waitForURL(u=>u.pathname.endsWith('tours.html')&&u.searchParams.get('place')==='charyn');
+ await page.locator('h1').waitFor();
+ assert.equal(await page.locator('[href*="operator.html"],#op-publish,#op-fix').count(),0);
+ assert.equal(await page.evaluate(()=>typeof FluxProof.publish),'undefined');
  await page.goto(base+'booking.html?place=charyn&lang=ru',{waitUntil:'domcontentloaded'});
  await page.locator('#fd-name').fill('Демо');await page.locator('#fd-email').fill('demo@example.test');
  await page.locator('#fd-consent').check();await page.locator('#fd-booking-form').evaluate(f=>f.requestSubmit());
@@ -22,15 +23,18 @@ try {
  const download=page.waitForEvent('download');await page.locator('#fd-download').click();
  assert.match((await download).suggestedFilename(),/^FX-.+-FLUX\.pdf$/);
  await page.locator('#fd-cancel').click();
- await page.goto(base+'operator.html?lang=ru',{waitUntil:'domcontentloaded'});
- assert((await page.locator('#op-bookings').innerText()).includes('Отмена запрошена'));
+ await page.reload({waitUntil:'domcontentloaded'});
+ await page.locator('#fd-cancel').waitFor();assert(await page.locator('#fd-cancel').isDisabled());
  for(const lang of ['ru','de','en'])for(const path of ['index.html','tours.html?place=charyn','booking.html?place=charyn','operator.html']) {
   await page.setViewportSize({width:390,height:844});
   const response=await page.goto(base+path+(path.includes('?')?'&':'?')+'lang='+lang,{waitUntil:'domcontentloaded'});
   assert.equal(response.status(),200);
+  if(path==='operator.html')await page.waitForURL(u=>u.pathname.endsWith('tours.html'));
+  await page.locator('h1').waitFor();
+  assert.equal(await page.locator('[href*="operator.html"],#op-publish,#op-fix').count(),0);
   assert.equal(await page.locator('h1').count(),1);
   assert(!(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth)),lang+' '+path);
  }
  assert.deepEqual(errors,[]);assert.equal(posts,0);
- console.log('PASS: operator, reload, booking, download, cancellation, inbox, 12 mobile routes, no JS errors or POST requests');
+ console.log('PASS: direct booking, PDF download, saved cancellation, removed operator redirect, 12 mobile routes, no JS errors or POST requests');
 } finally { await browser.close(); }

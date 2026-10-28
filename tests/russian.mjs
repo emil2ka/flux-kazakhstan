@@ -13,6 +13,8 @@ try {
   for(const route of routes){
    const response=await page.goto(base+route+(route.includes('?')?'&':'?')+'lang=ru',{waitUntil:'domcontentloaded'});
    assert.equal(response.status(),200);
+   if(route==='operator.html')await page.waitForURL(u=>u.pathname.endsWith('tours.html'));
+   await page.locator('h1').waitFor();
    assert.equal(await page.locator('html').getAttribute('lang'),'ru');
    assert.equal(await page.locator('h1').count(),1);
    assert.deepEqual(await page.evaluate(()=>[...(window.FluxMissingRU||[])]),[],route);

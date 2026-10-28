@@ -39,7 +39,7 @@ try {
   assert(ref);assert.equal(await page.locator('h1').count(),1);
   assert.equal(await page.evaluate(()=>FluxProof.read().bookings.length),1);
   // Change the live offer after acceptance. Both the page and PDF must retain v1.
-  await page.evaluate(()=>{FluxProof.saveDraft({...FluxProof.read().draft,transferExtra:false,price:69000,cancelHours:72});FluxProof.publish();});
+  await page.evaluate(()=>{const state=FluxProof.read(),old=FluxProof.published();const next={...old,id:'CH-2026-11-07-v2',number:2,departure:{...old.departure,price:69000,cancelHours:72}};state.versions.push(next);state.activeVersion=next.id;localStorage.setItem(FluxProof.KEY,JSON.stringify(state));});
   await page.reload({waitUntil:'domcontentloaded'});await page.locator('#fd-download').waitFor();
   assert.equal(await page.evaluate(()=>FluxReceipt.model(FluxProof.read().bookings[0],document.documentElement.lang).b.total),110000);
   await page.locator('.fd-saved-terms summary').click();

@@ -2,20 +2,18 @@
 
 [Что изменено к финалу: сайт, репозитории и документы](docs/FINAL-CHANGES.ru.md).
 
-Kazakhstan short-trip concept for German-speaking visitors. The full website is available in Russian, German and English: home, catalog, all five routes, journal, finder and operator workflow. The RU / DE / EN switch preserves the route and chosen language.
+Kazakhstan short-trip concept for German-speaking visitors. The full website is available in Russian, German and English: home, catalog, all five routes, journal, finder and booking workflow. The RU / DE / EN switch preserves the route and chosen language.
 
 Live Russian start: https://flux-kazakhstan.vercel.app/demo.html?lang=ru
 
-Operator: https://flux-kazakhstan.vercel.app/operator.html?lang=ru
-
 ## What works
 
-1. Structured departure: full price, inclusions, guide language and cancellation terms.
-2. Contradictory or incomplete fields block publication. Fix the sample transfer conflict, then publish a new version.
-3. A traveller books the published version. A stale checkout cannot confirm after conditions change.
-4. The demo booking retains its accepted terms snapshot. Its confirmation is a responsive travel pass with a Charyn photograph, traveller details and model payment breakdown. Download a styled two-page PDF (ticket + saved terms) or request cancellation; old snapshots survive later publications.
+1. Trip itinerary, full price, inclusions, guide language and cancellation terms are visible before booking.
+2. A traveller books directly from the trip page, without an operator check or publication step.
+3. The demo booking keeps the trip details accepted at checkout. Its confirmation is a responsive travel pass with a Charyn photograph, traveller details and model payment breakdown.
+4. Download a styled two-page PDF or request cancellation. The saved trip details remain attached to the booking.
 
-Confirmation links use a local booking reference. Reloading or switching RU / DE / EN preserves the confirmation in the same browser. Operator booking references open the saved confirmation. A cancellation request persists on reload and remains a request, not a completed refund.
+Confirmation links use a local booking reference. Reloading or switching RU / DE / EN preserves the confirmation in the same browser. A cancellation request persists on reload and remains a request, not a completed refund. The removed operator URL redirects to the Charyn trip so older links remain usable.
 
 The PDF uses two A4 landscape pages: a photo travel pass with a dark tear-off stub, then saved terms in two columns with a separate contact strip. The web confirmation keeps its existing layout. The PDF is generated locally on demand, including embedded fonts for Cyrillic, German and the tenge symbol. It does not send contact information to a server. `vendor/DEPENDENCIES.json` records the pinned jsPDF build and Adobe font revisions; MIT/OFL licenses are included. No CDN or internet connection is needed when the site is served locally.
 
@@ -35,7 +33,7 @@ No build step or external fonts are required.
 python3 -m http.server 3328 --bind 127.0.0.1
 ```
 
-Open http://127.0.0.1:3328/demo.html?lang=ru . Use HTTP, not a file URL, so pages share the same storage origin. Keep operator and traveller views in the same browser.
+Open http://127.0.0.1:3328/demo.html?lang=ru . Use HTTP, not a file URL, so pages share the same storage origin.
 
 ## Checks
 
@@ -49,8 +47,8 @@ tests/browser.mjs requires Playwright with Chromium available. FLUX_NODE_MODULES
 
 ## Source
 
-proof-core.js holds the tested version/booking model. final-demo.js and final-demo.css render the pilot; site.js and enhance.js render the original destination pages. Images/fonts are local. docs/AI-USE.md records AI use and links to prompts. The 55,000 KZT financial model includes twelve months of support; historical Stage 1 figures should not be mixed with it.
+proof-core.js holds the local booking model and saved trip details. final-demo.js and final-demo.css render the pilot; site.js and enhance.js render the original destination pages. Images/fonts are local. docs/AI-USE.md records AI use and links to prompts. The 55,000 KZT financial model includes twelve months of support; historical Stage 1 figures should not be mixed with it.
 
 ## Russian locale
 
-Edit locales/ru.json and run python3 scripts/build-locales.py to regenerate the offline i18n-ru.js. Full Russian checks: node tests/russian.mjs (Playwright required). The dictionary covers 362 interface strings and all five itineraries.
+Edit locales/ru.json and run python3 scripts/build-locales.py to regenerate the offline i18n-ru.js. Full Russian checks: node tests/russian.mjs (Playwright required). The dictionary covers 363 interface strings and all five itineraries.

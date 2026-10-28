@@ -1,4 +1,4 @@
-/* FLUX demo model. Local, versioned records; no real payment or live inventory. */
+/* FLUX local booking records and accepted trip details. No real payment or live inventory. */
 (function (root, factory) {
   const api = factory();
   if (typeof module === 'object' && module.exports) module.exports = api;
@@ -14,7 +14,7 @@
     cancelHours: 48, meeting: 'Almaty', currency: 'KZT'
   };
   const initial = () => ({
-    schema: 1, draft: { ...clone(DEFAULT), transferExtra: true },
+    schema: 1,
     activeVersion: 'CH-2026-11-07-v1',
     versions: [{ id: 'CH-2026-11-07-v1', number: 1, publishedAt: '2026-10-27T00:00:00Z', departure: clone(DEFAULT) }],
     bookings: []
@@ -37,42 +37,10 @@
     try { s.setItem(KEY, JSON.stringify(value)); } catch (_) { throw new Error('storage'); }
     return clone(value);
   }
-  function check(d) {
-    const errors = [];
-    if (!Number.isInteger(d.price) || d.price < 1 || d.price > 1000000) errors.push('price');
-    if (!Number.isInteger(d.capacity) || d.capacity < 1 || d.capacity > 8) errors.push('capacity');
-    if (d.transfer !== 'included') errors.push('transfer');
-    if (d.transfer === 'included' && d.transferExtra) errors.push('transfer_conflict');
-    if (d.accommodation !== 'included') errors.push('accommodation');
-    if (d.park !== 'included') errors.push('park');
-    if (d.meals !== 'included') errors.push('meals');
-    if (!Array.isArray(d.languages) || !d.languages.length || d.languages.some(l => !['de', 'en'].includes(l))) errors.push('language');
-    if (![24, 48, 72].includes(Number(d.cancelHours))) errors.push('cancellation');
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(d.start || '') || !/^\d{4}-\d{2}-\d{2}$/.test(d.end || '') || d.start > d.end) errors.push('date');
-    return errors;
-  }
   function published(store) {
     const state = read(store);
     const version = state.versions.find(v => v.id === state.activeVersion);
-    if (!version || check(version.departure).length) throw new Error('unpublished');
-    return clone(version);
-  }
-  function saveDraft(draft, store) {
-    const state = read(store);
-    // Route/date are intentionally fixed for this one-route pilot.
-    state.draft = { ...clone(DEFAULT), ...clone(draft), id: DEFAULT.id, tour: 'charyn', start: DEFAULT.start, end: DEFAULT.end };
-    write(state, store);
-    return clone(state.draft);
-  }
-  function publish(store) {
-    const state = read(store);
-    if (check(state.draft).length) throw new Error('inconsistent');
-    const alreadyBooked = state.bookings.filter(b => ['demo_confirmed', 'cancel_requested'].includes(b.status)).reduce((n, b) => n + b.guests, 0);
-    if (state.draft.capacity < alreadyBooked) throw new Error('capacity');
-    const number = Math.max(...state.versions.map(v => v.number)) + 1;
-    const version = { id: `CH-2026-11-07-v${number}`, number, publishedAt: new Date().toISOString(), departure: clone(state.draft) };
-    state.versions.push(version); state.activeVersion = version.id;
-    write(state, store);
+    if (!version || !version.departure || !Number.isInteger(version.departure.price) || version.departure.price < 1) throw new Error('departure');
     return clone(version);
   }
   function remaining(store) {
@@ -108,5 +76,5 @@
     booking.status = 'cancel_requested'; write(state, store);
     return clone(booking);
   }
-  return { KEY, DEFAULT: clone(DEFAULT), read, check, saveDraft, publish, published, remaining, book, cancel };
+  return { KEY, DEFAULT: clone(DEFAULT), read, published, remaining, book, cancel };
 });
