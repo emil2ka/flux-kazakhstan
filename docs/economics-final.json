@@ -1,12 +1,22 @@
 {
-  "status": "Final 44000 day-trip planning model; no AI interpretation or satellite equipment; rates and demand unvalidated",
+  "status": "Final 44000 day-trip planning model; audio guide included as cost estimate; no AI interpretation or satellite equipment; rates and demand unvalidated",
   "currency": "KZT",
   "pilot_price": 44000,
   "guide_language": "en",
   "german_guide": "Not offered; English-speaking guide only",
   "case_historical_average": 44000,
   "pilot_days": 1,
-  "upfront": 3600000,
+  "upfront": 4200000,
+  "audio_guide": {
+    "status": "Planning allowance, not supplier quote; prototype and field trial required",
+    "one_time_total": 600000,
+    "software_and_local_sync": 300000,
+    "script_translation_voice": 120000,
+    "router_power": 100000,
+    "earphones_and_accessories": 80000,
+    "per_guest_hygiene": 500,
+    "implementation": "guest phones with preloaded recordings and local network; connectivity and playback need validation"
+  },
   "monthly_fixed_breakdown": {
     "technical_support": 150000,
     "booking_operations": 100000,
@@ -53,15 +63,16 @@
     "vehicle_driver_one_day": 100000,
     "english_guide_one_day": 60000,
     "consumables": 1000,
-    "variable_per_guest": 7000,
+    "variable_per_guest": 7500,
     "lunch": 4000,
     "park": 2000,
     "water": 1000,
+    "audio_hygiene_per_guest": 500,
     "guesthouse": 0,
     "status": "Own allowances. Insurance, guide tax, overtime and park charges require supplier confirmation."
   },
-  "unit_trip_cost_at_target_load": 23100.0,
-  "unit_contribution_after_variable_costs_and_CAC": 14380.0,
+  "unit_trip_cost_at_target_load": 23600.0,
+  "unit_contribution_after_variable_costs_and_CAC": 13880.0,
   "assumptions": {
     "foreign_baseline": 136,
     "domestic_baseline": 3264,
@@ -82,20 +93,20 @@
       "name": "base",
       "volume_factor": 1,
       "departure_policy": "consolidate demand; fewer departures",
-      "payback_month": 14,
+      "payback_month": 15,
       "year1_travelers": 400,
       "year2_travelers": 1263,
       "year1_departures": 40,
       "year2_departures": 129,
       "year1_revenue": 17600000,
       "year2_revenue": 55572000,
-      "year1_project_cost": 9808000.0,
-      "year1_trip_cost": 9240000,
-      "year1_total_cost": 19048000.0,
-      "year1_cash": -1448000.0,
-      "year2_cash": 14127240.0,
-      "cash_month24": 12679240.0,
-      "peak_funding_need": 4081000.0,
+      "year1_project_cost": 10408000.0,
+      "year1_trip_cost": 9440000,
+      "year1_total_cost": 19848000.0,
+      "year1_cash": -2248000.0,
+      "year2_cash": 13495740.0,
+      "cash_month24": 11247740.0,
+      "peak_funding_need": 4706000.0,
       "year2_foreign_share": 0.3000214454214025,
       "rows": [
         {
@@ -111,7 +122,7 @@
           "acquisition": 0,
           "support": 300000,
           "net": -300000.0,
-          "cumulative_cash": -3900000.0
+          "cumulative_cash": -4500000.0
         },
         {
           "month": 2,
@@ -119,14 +130,14 @@
           "departures": 1,
           "mean_load": 10.0,
           "revenue": 440000,
-          "trip_cost": 231000,
+          "trip_cost": 236000,
           "acquiring": 13200.0,
           "reserve": 8800.0,
           "tax": 13200.0,
           "acquisition": 30000,
           "support": 300000,
-          "net": -156200.0,
-          "cumulative_cash": -4056200.0
+          "net": -161200.0,
+          "cumulative_cash": -4661200.0
         },
         {
           "month": 3,
@@ -134,14 +145,14 @@
           "departures": 2,
           "mean_load": 10.0,
           "revenue": 880000,
-          "trip_cost": 462000,
+          "trip_cost": 472000,
           "acquiring": 26400.0,
           "reserve": 17600.0,
           "tax": 26400.0,
           "acquisition": 60000,
           "support": 300000,
-          "net": -12400.0,
-          "cumulative_cash": -4068600.0
+          "net": -22400.0,
+          "cumulative_cash": -4683600.0
         },
         {
           "month": 4,
@@ -149,14 +160,14 @@
           "departures": 2,
           "mean_load": 10.0,
           "revenue": 880000,
-          "trip_cost": 462000,
+          "trip_cost": 472000,
           "acquiring": 26400.0,
           "reserve": 17600.0,
           "tax": 26400.0,
           "acquisition": 60000,
           "support": 300000,
-          "net": -12400.0,
-          "cumulative_cash": -4081000.0
+          "net": -22400.0,
+          "cumulative_cash": -4706000.0
         },
         {
           "month": 5,
@@ -164,14 +175,14 @@
           "departures": 3,
           "mean_load": 10.0,
           "revenue": 1320000,
-          "trip_cost": 693000,
+          "trip_cost": 708000,
           "acquiring": 39600.0,
           "reserve": 26400.0,
           "tax": 39600.0,
           "acquisition": 90000,
           "support": 300000,
-          "net": 131400.0,
-          "cumulative_cash": -3949600.0
+          "net": 116400.0,
+          "cumulative_cash": -4589600.0
         },
         {
           "month": 6,
@@ -179,14 +190,14 @@
           "departures": 4,
           "mean_load": 10.0,
           "revenue": 1760000,
-          "trip_cost": 924000,
+          "trip_cost": 944000,
           "acquiring": 52800.0,
           "reserve": 35200.0,
           "tax": 52800.0,
           "acquisition": 120000,
           "support": 300000,
-          "net": 275200.0,
-          "cumulative_cash": -3674400.0
+          "net": 255200.0,
+          "cumulative_cash": -4334400.0
         },
         {
           "month": 7,
@@ -194,14 +205,14 @@
           "departures": 4,
           "mean_load": 10.0,
           "revenue": 1760000,
-          "trip_cost": 924000,
+          "trip_cost": 944000,
           "acquiring": 52800.0,
           "reserve": 35200.0,
           "tax": 52800.0,
           "acquisition": 120000,
           "support": 300000,
-          "net": 275200.0,
-          "cumulative_cash": -3399200.0
+          "net": 255200.0,
+          "cumulative_cash": -4079200.0
         },
         {
           "month": 8,
@@ -209,14 +220,14 @@
           "departures": 5,
           "mean_load": 10.0,
           "revenue": 2200000,
-          "trip_cost": 1155000,
+          "trip_cost": 1180000,
           "acquiring": 66000.0,
           "reserve": 44000.0,
           "tax": 66000.0,
           "acquisition": 150000,
           "support": 300000,
-          "net": 419000.0,
-          "cumulative_cash": -2980200.0
+          "net": 394000.0,
+          "cumulative_cash": -3685200.0
         },
         {
           "month": 9,
@@ -224,14 +235,14 @@
           "departures": 5,
           "mean_load": 10.0,
           "revenue": 2200000,
-          "trip_cost": 1155000,
+          "trip_cost": 1180000,
           "acquiring": 66000.0,
           "reserve": 44000.0,
           "tax": 66000.0,
           "acquisition": 150000,
           "support": 300000,
-          "net": 419000.0,
-          "cumulative_cash": -2561200.0
+          "net": 394000.0,
+          "cumulative_cash": -3291200.0
         },
         {
           "month": 10,
@@ -239,14 +250,14 @@
           "departures": 5,
           "mean_load": 10.0,
           "revenue": 2200000,
-          "trip_cost": 1155000,
+          "trip_cost": 1180000,
           "acquiring": 66000.0,
           "reserve": 44000.0,
           "tax": 66000.0,
           "acquisition": 150000,
           "support": 300000,
-          "net": 419000.0,
-          "cumulative_cash": -2142200.0
+          "net": 394000.0,
+          "cumulative_cash": -2897200.0
         },
         {
           "month": 11,
@@ -254,14 +265,14 @@
           "departures": 5,
           "mean_load": 10.0,
           "revenue": 2200000,
-          "trip_cost": 1155000,
+          "trip_cost": 1180000,
           "acquiring": 66000.0,
           "reserve": 44000.0,
           "tax": 66000.0,
           "acquisition": 150000,
           "support": 300000,
-          "net": 419000.0,
-          "cumulative_cash": -1723200.0
+          "net": 394000.0,
+          "cumulative_cash": -2503200.0
         },
         {
           "month": 12,
@@ -269,14 +280,14 @@
           "departures": 4,
           "mean_load": 10.0,
           "revenue": 1760000,
-          "trip_cost": 924000,
+          "trip_cost": 944000,
           "acquiring": 52800.0,
           "reserve": 35200.0,
           "tax": 52800.0,
           "acquisition": 120000,
           "support": 300000,
-          "net": 275200.0,
-          "cumulative_cash": -1448000.0
+          "net": 255200.0,
+          "cumulative_cash": -2248000.0
         },
         {
           "month": 13,
@@ -284,14 +295,14 @@
           "departures": 7,
           "mean_load": 10.0,
           "revenue": 3080000,
-          "trip_cost": 1617000,
+          "trip_cost": 1652000,
           "acquiring": 92400.0,
           "reserve": 61600.0,
           "tax": 92400.0,
           "acquisition": 210000,
           "support": 300000,
-          "net": 706600.0,
-          "cumulative_cash": -741400.0
+          "net": 671600.0,
+          "cumulative_cash": -1576400.0
         },
         {
           "month": 14,
@@ -299,14 +310,14 @@
           "departures": 8,
           "mean_load": 10.0,
           "revenue": 3520000,
-          "trip_cost": 1848000,
+          "trip_cost": 1888000,
           "acquiring": 105600.0,
           "reserve": 70400.0,
           "tax": 105600.0,
           "acquisition": 240000,
           "support": 300000,
-          "net": 850400.0,
-          "cumulative_cash": 109000.0
+          "net": 810400.0,
+          "cumulative_cash": -766000.0
         },
         {
           "month": 15,
@@ -314,14 +325,14 @@
           "departures": 9,
           "mean_load": 10.0,
           "revenue": 3960000,
-          "trip_cost": 2079000,
+          "trip_cost": 2124000,
           "acquiring": 118800.0,
           "reserve": 79200.0,
           "tax": 118800.0,
           "acquisition": 270000,
           "support": 300000,
-          "net": 994200.0,
-          "cumulative_cash": 1103200.0
+          "net": 949200.0,
+          "cumulative_cash": 183200.0
         },
         {
           "month": 16,
@@ -329,14 +340,14 @@
           "departures": 10,
           "mean_load": 9.5,
           "revenue": 4180000,
-          "trip_cost": 2275000,
+          "trip_cost": 2322500,
           "acquiring": 125400.0,
           "reserve": 83600.0,
           "tax": 125400.0,
           "acquisition": 285000,
           "support": 300000,
-          "net": 985600.0,
-          "cumulative_cash": 2088800.0
+          "net": 938100.0,
+          "cumulative_cash": 1121300.0
         },
         {
           "month": 17,
@@ -344,14 +355,14 @@
           "departures": 10,
           "mean_load": 10.0,
           "revenue": 4400000,
-          "trip_cost": 2310000,
+          "trip_cost": 2360000,
           "acquiring": 132000.0,
           "reserve": 88000.0,
           "tax": 132000.0,
           "acquisition": 300000,
           "support": 300000,
-          "net": 1138000.0,
-          "cumulative_cash": 3226800.0
+          "net": 1088000.0,
+          "cumulative_cash": 2209300.0
         },
         {
           "month": 18,
@@ -359,14 +370,14 @@
           "departures": 11,
           "mean_load": 9.5455,
           "revenue": 4620000,
-          "trip_cost": 2506000,
+          "trip_cost": 2558500,
           "acquiring": 138600.0,
           "reserve": 92400.0,
           "tax": 138600.0,
           "acquisition": 315000,
           "support": 300000,
-          "net": 1129400.0,
-          "cumulative_cash": 4356200.0
+          "net": 1076900.0,
+          "cumulative_cash": 3286200.0
         },
         {
           "month": 19,
@@ -374,14 +385,14 @@
           "departures": 11,
           "mean_load": 10.0,
           "revenue": 4840000,
-          "trip_cost": 2541000,
+          "trip_cost": 2596000,
           "acquiring": 145200.0,
           "reserve": 96800.0,
           "tax": 145200.0,
           "acquisition": 330000,
           "support": 300000,
-          "net": 1281800.0,
-          "cumulative_cash": 5638000.0
+          "net": 1226800.0,
+          "cumulative_cash": 4513000.0
         },
         {
           "month": 20,
@@ -389,14 +400,14 @@
           "departures": 12,
           "mean_load": 9.5833,
           "revenue": 5060000,
-          "trip_cost": 2737000,
+          "trip_cost": 2794500,
           "acquiring": 151800.0,
           "reserve": 101200.0,
           "tax": 151800.0,
           "acquisition": 345000,
           "support": 300000,
-          "net": 1273200.0,
-          "cumulative_cash": 6911200.0
+          "net": 1215700.0,
+          "cumulative_cash": 5728700.0
         },
         {
           "month": 21,
@@ -404,14 +415,14 @@
           "departures": 12,
           "mean_load": 10.0,
           "revenue": 5280000,
-          "trip_cost": 2772000,
+          "trip_cost": 2832000,
           "acquiring": 158400.0,
           "reserve": 105600.0,
           "tax": 158400.0,
           "acquisition": 360000,
           "support": 300000,
-          "net": 1425600.0,
-          "cumulative_cash": 8336800.0
+          "net": 1365600.0,
+          "cumulative_cash": 7094300.0
         },
         {
           "month": 22,
@@ -419,14 +430,14 @@
           "departures": 13,
           "mean_load": 9.6154,
           "revenue": 5500000,
-          "trip_cost": 2968000,
+          "trip_cost": 3030500,
           "acquiring": 165000.0,
           "reserve": 110000.0,
           "tax": 165000.0,
           "acquisition": 375000,
           "support": 300000,
-          "net": 1417000.0,
-          "cumulative_cash": 9753800.0
+          "net": 1354500.0,
+          "cumulative_cash": 8448800.0
         },
         {
           "month": 23,
@@ -434,14 +445,14 @@
           "departures": 13,
           "mean_load": 9.6154,
           "revenue": 5500000,
-          "trip_cost": 2968000,
+          "trip_cost": 3030500,
           "acquiring": 165000.0,
           "reserve": 110000.0,
           "tax": 165000.0,
           "acquisition": 375000,
           "support": 300000,
-          "net": 1417000.0,
-          "cumulative_cash": 11170800.0
+          "net": 1354500.0,
+          "cumulative_cash": 9803300.0
         },
         {
           "month": 24,
@@ -449,14 +460,14 @@
           "departures": 13,
           "mean_load": 9.8462,
           "revenue": 5632000,
-          "trip_cost": 2989000,
+          "trip_cost": 3053000,
           "acquiring": 168960.0,
           "reserve": 112640.0,
           "tax": 168960.0,
           "acquisition": 384000,
           "support": 300000,
-          "net": 1508440.0,
-          "cumulative_cash": 12679240.0
+          "net": 1444440.0,
+          "cumulative_cash": 11247740.0
         }
       ]
     },
@@ -464,20 +475,20 @@
       "name": "downside_minus30",
       "volume_factor": 0.7,
       "departure_policy": "consolidate demand; fewer departures",
-      "payback_month": 21,
+      "payback_month": 22,
       "year1_travelers": 280,
       "year2_travelers": 887,
       "year1_departures": 33,
       "year2_departures": 93,
       "year1_revenue": 12320000,
       "year2_revenue": 39028000,
-      "year1_project_cost": 9385600.0,
-      "year1_trip_cost": 7273000,
-      "year1_total_cost": 16658600.0,
-      "year1_cash": -4338600.0,
-      "year2_cash": 7334760.0,
-      "cash_month24": 2996160.0,
-      "peak_funding_need": 4753120.0,
+      "year1_project_cost": 9985600.0,
+      "year1_trip_cost": 7413000,
+      "year1_total_cost": 17398600.0,
+      "year1_cash": -5078600.0,
+      "year2_cash": 6891260.0,
+      "cash_month24": 1812660.0,
+      "peak_funding_need": 5381120.0,
       "year2_foreign_share": 0.23862841147655703,
       "rows": [
         {
@@ -493,7 +504,7 @@
           "acquisition": 0,
           "support": 300000,
           "net": -300000.0,
-          "cumulative_cash": -3900000.0
+          "cumulative_cash": -4500000.0
         },
         {
           "month": 2,
@@ -501,14 +512,14 @@
           "departures": 1,
           "mean_load": 7.0,
           "revenue": 308000,
-          "trip_cost": 210000,
+          "trip_cost": 213500,
           "acquiring": 9240.0,
           "reserve": 6160.0,
           "tax": 9240.0,
           "acquisition": 30000,
           "support": 300000,
-          "net": -256640.0,
-          "cumulative_cash": -4156640.0
+          "net": -260140.0,
+          "cumulative_cash": -4760140.0
         },
         {
           "month": 3,
@@ -516,14 +527,14 @@
           "departures": 2,
           "mean_load": 7.0,
           "revenue": 616000,
-          "trip_cost": 420000,
+          "trip_cost": 427000,
           "acquiring": 18480.0,
           "reserve": 12320.0,
           "tax": 18480.0,
           "acquisition": 60000,
           "support": 300000,
-          "net": -213280.0,
-          "cumulative_cash": -4369920.0
+          "net": -220280.0,
+          "cumulative_cash": -4980420.0
         },
         {
           "month": 4,
@@ -531,14 +542,14 @@
           "departures": 2,
           "mean_load": 7.0,
           "revenue": 616000,
-          "trip_cost": 420000,
+          "trip_cost": 427000,
           "acquiring": 18480.0,
           "reserve": 12320.0,
           "tax": 18480.0,
           "acquisition": 60000,
           "support": 300000,
-          "net": -213280.0,
-          "cumulative_cash": -4583200.0
+          "net": -220280.0,
+          "cumulative_cash": -5200700.0
         },
         {
           "month": 5,
@@ -546,14 +557,14 @@
           "departures": 3,
           "mean_load": 7.0,
           "revenue": 924000,
-          "trip_cost": 630000,
+          "trip_cost": 640500,
           "acquiring": 27720.0,
           "reserve": 18480.0,
           "tax": 27720.0,
           "acquisition": 90000,
           "support": 300000,
-          "net": -169920.0,
-          "cumulative_cash": -4753120.0
+          "net": -180420.0,
+          "cumulative_cash": -5381120.0
         },
         {
           "month": 6,
@@ -561,14 +572,14 @@
           "departures": 3,
           "mean_load": 9.3333,
           "revenue": 1232000,
-          "trip_cost": 679000,
+          "trip_cost": 693000,
           "acquiring": 36960.0,
           "reserve": 24640.0,
           "tax": 36960.0,
           "acquisition": 120000,
           "support": 300000,
-          "net": 34440.0,
-          "cumulative_cash": -4718680.0
+          "net": 20440.0,
+          "cumulative_cash": -5360680.0
         },
         {
           "month": 7,
@@ -576,14 +587,14 @@
           "departures": 3,
           "mean_load": 9.3333,
           "revenue": 1232000,
-          "trip_cost": 679000,
+          "trip_cost": 693000,
           "acquiring": 36960.0,
           "reserve": 24640.0,
           "tax": 36960.0,
           "acquisition": 120000,
           "support": 300000,
-          "net": 34440.0,
-          "cumulative_cash": -4684240.0
+          "net": 20440.0,
+          "cumulative_cash": -5340240.0
         },
         {
           "month": 8,
@@ -591,14 +602,14 @@
           "departures": 4,
           "mean_load": 8.75,
           "revenue": 1540000,
-          "trip_cost": 889000,
+          "trip_cost": 906500,
           "acquiring": 46200.0,
           "reserve": 30800.0,
           "tax": 46200.0,
           "acquisition": 150000,
           "support": 300000,
-          "net": 77800.0,
-          "cumulative_cash": -4606440.0
+          "net": 60300.0,
+          "cumulative_cash": -5279940.0
         },
         {
           "month": 9,
@@ -606,14 +617,14 @@
           "departures": 4,
           "mean_load": 8.75,
           "revenue": 1540000,
-          "trip_cost": 889000,
+          "trip_cost": 906500,
           "acquiring": 46200.0,
           "reserve": 30800.0,
           "tax": 46200.0,
           "acquisition": 150000,
           "support": 300000,
-          "net": 77800.0,
-          "cumulative_cash": -4528640.0
+          "net": 60300.0,
+          "cumulative_cash": -5219640.0
         },
         {
           "month": 10,
@@ -621,14 +632,14 @@
           "departures": 4,
           "mean_load": 8.75,
           "revenue": 1540000,
-          "trip_cost": 889000,
+          "trip_cost": 906500,
           "acquiring": 46200.0,
           "reserve": 30800.0,
           "tax": 46200.0,
           "acquisition": 150000,
           "support": 300000,
-          "net": 77800.0,
-          "cumulative_cash": -4450840.0
+          "net": 60300.0,
+          "cumulative_cash": -5159340.0
         },
         {
           "month": 11,
@@ -636,14 +647,14 @@
           "departures": 4,
           "mean_load": 8.75,
           "revenue": 1540000,
-          "trip_cost": 889000,
+          "trip_cost": 906500,
           "acquiring": 46200.0,
           "reserve": 30800.0,
           "tax": 46200.0,
           "acquisition": 150000,
           "support": 300000,
-          "net": 77800.0,
-          "cumulative_cash": -4373040.0
+          "net": 60300.0,
+          "cumulative_cash": -5099040.0
         },
         {
           "month": 12,
@@ -651,14 +662,14 @@
           "departures": 3,
           "mean_load": 9.3333,
           "revenue": 1232000,
-          "trip_cost": 679000,
+          "trip_cost": 693000,
           "acquiring": 36960.0,
           "reserve": 24640.0,
           "tax": 36960.0,
           "acquisition": 120000,
           "support": 300000,
-          "net": 34440.0,
-          "cumulative_cash": -4338600.0
+          "net": 20440.0,
+          "cumulative_cash": -5078600.0
         },
         {
           "month": 13,
@@ -666,14 +677,14 @@
           "departures": 5,
           "mean_load": 9.8,
           "revenue": 2156000,
-          "trip_cost": 1148000,
+          "trip_cost": 1172500,
           "acquiring": 64680.0,
           "reserve": 43120.0,
           "tax": 64680.0,
           "acquisition": 210000,
           "support": 300000,
-          "net": 325520.0,
-          "cumulative_cash": -4013080.0
+          "net": 301020.0,
+          "cumulative_cash": -4777580.0
         },
         {
           "month": 14,
@@ -681,14 +692,14 @@
           "departures": 6,
           "mean_load": 9.3333,
           "revenue": 2464000,
-          "trip_cost": 1358000,
+          "trip_cost": 1386000,
           "acquiring": 73920.0,
           "reserve": 49280.0,
           "tax": 73920.0,
           "acquisition": 240000,
           "support": 300000,
-          "net": 368880.0,
-          "cumulative_cash": -3644200.0
+          "net": 340880.0,
+          "cumulative_cash": -4436700.0
         },
         {
           "month": 15,
@@ -696,14 +707,14 @@
           "departures": 7,
           "mean_load": 9.0,
           "revenue": 2772000,
-          "trip_cost": 1568000,
+          "trip_cost": 1599500,
           "acquiring": 83160.0,
           "reserve": 55440.0,
           "tax": 83160.0,
           "acquisition": 270000,
           "support": 300000,
-          "net": 412240.0,
-          "cumulative_cash": -3231960.0
+          "net": 380740.0,
+          "cumulative_cash": -4055960.0
         },
         {
           "month": 16,
@@ -711,14 +722,14 @@
           "departures": 7,
           "mean_load": 9.5714,
           "revenue": 2948000,
-          "trip_cost": 1596000,
+          "trip_cost": 1629500,
           "acquiring": 88440.0,
           "reserve": 58960.0,
           "tax": 88440.0,
           "acquisition": 285000,
           "support": 300000,
-          "net": 531160.0,
-          "cumulative_cash": -2700800.0
+          "net": 497660.0,
+          "cumulative_cash": -3558300.0
         },
         {
           "month": 17,
@@ -726,14 +737,14 @@
           "departures": 7,
           "mean_load": 10.0,
           "revenue": 3080000,
-          "trip_cost": 1617000,
+          "trip_cost": 1652000,
           "acquiring": 92400.0,
           "reserve": 61600.0,
           "tax": 92400.0,
           "acquisition": 300000,
           "support": 300000,
-          "net": 616600.0,
-          "cumulative_cash": -2084200.0
+          "net": 581600.0,
+          "cumulative_cash": -2976700.0
         },
         {
           "month": 18,
@@ -741,14 +752,14 @@
           "departures": 8,
           "mean_load": 9.25,
           "revenue": 3256000,
-          "trip_cost": 1806000,
+          "trip_cost": 1843000,
           "acquiring": 97680.0,
           "reserve": 65120.0,
           "tax": 97680.0,
           "acquisition": 315000,
           "support": 300000,
-          "net": 574520.0,
-          "cumulative_cash": -1509680.0
+          "net": 537520.0,
+          "cumulative_cash": -2439180.0
         },
         {
           "month": 19,
@@ -756,14 +767,14 @@
           "departures": 8,
           "mean_load": 9.625,
           "revenue": 3388000,
-          "trip_cost": 1827000,
+          "trip_cost": 1865500,
           "acquiring": 101640.0,
           "reserve": 67760.0,
           "tax": 101640.0,
           "acquisition": 330000,
           "support": 300000,
-          "net": 659960.0,
-          "cumulative_cash": -849720.0
+          "net": 621460.0,
+          "cumulative_cash": -1817720.0
         },
         {
           "month": 20,
@@ -771,14 +782,14 @@
           "departures": 9,
           "mean_load": 9.0,
           "revenue": 3564000,
-          "trip_cost": 2016000,
+          "trip_cost": 2056500,
           "acquiring": 106920.0,
           "reserve": 71280.0,
           "tax": 106920.0,
           "acquisition": 345000,
           "support": 300000,
-          "net": 617880.0,
-          "cumulative_cash": -231840.0
+          "net": 577380.0,
+          "cumulative_cash": -1240340.0
         },
         {
           "month": 21,
@@ -786,14 +797,14 @@
           "departures": 9,
           "mean_load": 9.3333,
           "revenue": 3696000,
-          "trip_cost": 2037000,
+          "trip_cost": 2079000,
           "acquiring": 110880.0,
           "reserve": 73920.0,
           "tax": 110880.0,
           "acquisition": 360000,
           "support": 300000,
-          "net": 703320.0,
-          "cumulative_cash": 471480.0
+          "net": 661320.0,
+          "cumulative_cash": -579020.0
         },
         {
           "month": 22,
@@ -801,14 +812,14 @@
           "departures": 9,
           "mean_load": 9.7778,
           "revenue": 3872000,
-          "trip_cost": 2065000,
+          "trip_cost": 2109000,
           "acquiring": 116160.0,
           "reserve": 77440.0,
           "tax": 116160.0,
           "acquisition": 375000,
           "support": 300000,
-          "net": 822240.0,
-          "cumulative_cash": 1293720.0
+          "net": 778240.0,
+          "cumulative_cash": 199220.0
         },
         {
           "month": 23,
@@ -816,14 +827,14 @@
           "departures": 9,
           "mean_load": 9.7778,
           "revenue": 3872000,
-          "trip_cost": 2065000,
+          "trip_cost": 2109000,
           "acquiring": 116160.0,
           "reserve": 77440.0,
           "tax": 116160.0,
           "acquisition": 375000,
           "support": 300000,
-          "net": 822240.0,
-          "cumulative_cash": 2115960.0
+          "net": 778240.0,
+          "cumulative_cash": 977460.0
         },
         {
           "month": 24,
@@ -831,14 +842,14 @@
           "departures": 9,
           "mean_load": 10.0,
           "revenue": 3960000,
-          "trip_cost": 2079000,
+          "trip_cost": 2124000,
           "acquiring": 118800.0,
           "reserve": 79200.0,
           "tax": 118800.0,
           "acquisition": 384000,
           "support": 300000,
-          "net": 880200.0,
-          "cumulative_cash": 2996160.0
+          "net": 835200.0,
+          "cumulative_cash": 1812660.0
         }
       ]
     }
@@ -854,13 +865,13 @@
     "year2_departures": 129,
     "year1_revenue": 12320000,
     "year2_revenue": 39028000,
-    "year1_project_cost": 9385600.0,
-    "year1_trip_cost": 8400000,
-    "year1_total_cost": 17785600.0,
-    "year1_cash": -5465600.0,
-    "year2_cash": 1538760.0,
-    "cash_month24": -3926840.0,
-    "peak_funding_need": 5465600.0,
+    "year1_project_cost": 9985600.0,
+    "year1_trip_cost": 8540000,
+    "year1_total_cost": 18525600.0,
+    "year1_cash": -6205600.0,
+    "year2_cash": 1095260.0,
+    "cash_month24": -5110340.0,
+    "peak_funding_need": 6226580.0,
     "year2_foreign_share": 0.23862841147655703,
     "rows": [
       {
@@ -876,7 +887,7 @@
         "acquisition": 0,
         "support": 300000,
         "net": -300000.0,
-        "cumulative_cash": -3900000.0
+        "cumulative_cash": -4500000.0
       },
       {
         "month": 2,
@@ -884,14 +895,14 @@
         "departures": 1,
         "mean_load": 7.0,
         "revenue": 308000,
-        "trip_cost": 210000,
+        "trip_cost": 213500,
         "acquiring": 9240.0,
         "reserve": 6160.0,
         "tax": 9240.0,
         "acquisition": 30000,
         "support": 300000,
-        "net": -256640.0,
-        "cumulative_cash": -4156640.0
+        "net": -260140.0,
+        "cumulative_cash": -4760140.0
       },
       {
         "month": 3,
@@ -899,14 +910,14 @@
         "departures": 2,
         "mean_load": 7.0,
         "revenue": 616000,
-        "trip_cost": 420000,
+        "trip_cost": 427000,
         "acquiring": 18480.0,
         "reserve": 12320.0,
         "tax": 18480.0,
         "acquisition": 60000,
         "support": 300000,
-        "net": -213280.0,
-        "cumulative_cash": -4369920.0
+        "net": -220280.0,
+        "cumulative_cash": -4980420.0
       },
       {
         "month": 4,
@@ -914,14 +925,14 @@
         "departures": 2,
         "mean_load": 7.0,
         "revenue": 616000,
-        "trip_cost": 420000,
+        "trip_cost": 427000,
         "acquiring": 18480.0,
         "reserve": 12320.0,
         "tax": 18480.0,
         "acquisition": 60000,
         "support": 300000,
-        "net": -213280.0,
-        "cumulative_cash": -4583200.0
+        "net": -220280.0,
+        "cumulative_cash": -5200700.0
       },
       {
         "month": 5,
@@ -929,14 +940,14 @@
         "departures": 3,
         "mean_load": 7.0,
         "revenue": 924000,
-        "trip_cost": 630000,
+        "trip_cost": 640500,
         "acquiring": 27720.0,
         "reserve": 18480.0,
         "tax": 27720.0,
         "acquisition": 90000,
         "support": 300000,
-        "net": -169920.0,
-        "cumulative_cash": -4753120.0
+        "net": -180420.0,
+        "cumulative_cash": -5381120.0
       },
       {
         "month": 6,
@@ -944,14 +955,14 @@
         "departures": 4,
         "mean_load": 7.0,
         "revenue": 1232000,
-        "trip_cost": 840000,
+        "trip_cost": 854000,
         "acquiring": 36960.0,
         "reserve": 24640.0,
         "tax": 36960.0,
         "acquisition": 120000,
         "support": 300000,
-        "net": -126560.0,
-        "cumulative_cash": -4879680.0
+        "net": -140560.0,
+        "cumulative_cash": -5521680.0
       },
       {
         "month": 7,
@@ -959,14 +970,14 @@
         "departures": 4,
         "mean_load": 7.0,
         "revenue": 1232000,
-        "trip_cost": 840000,
+        "trip_cost": 854000,
         "acquiring": 36960.0,
         "reserve": 24640.0,
         "tax": 36960.0,
         "acquisition": 120000,
         "support": 300000,
-        "net": -126560.0,
-        "cumulative_cash": -5006240.0
+        "net": -140560.0,
+        "cumulative_cash": -5662240.0
       },
       {
         "month": 8,
@@ -974,14 +985,14 @@
         "departures": 5,
         "mean_load": 7.0,
         "revenue": 1540000,
-        "trip_cost": 1050000,
+        "trip_cost": 1067500,
         "acquiring": 46200.0,
         "reserve": 30800.0,
         "tax": 46200.0,
         "acquisition": 150000,
         "support": 300000,
-        "net": -83200.0,
-        "cumulative_cash": -5089440.0
+        "net": -100700.0,
+        "cumulative_cash": -5762940.0
       },
       {
         "month": 9,
@@ -989,14 +1000,14 @@
         "departures": 5,
         "mean_load": 7.0,
         "revenue": 1540000,
-        "trip_cost": 1050000,
+        "trip_cost": 1067500,
         "acquiring": 46200.0,
         "reserve": 30800.0,
         "tax": 46200.0,
         "acquisition": 150000,
         "support": 300000,
-        "net": -83200.0,
-        "cumulative_cash": -5172640.0
+        "net": -100700.0,
+        "cumulative_cash": -5863640.0
       },
       {
         "month": 10,
@@ -1004,14 +1015,14 @@
         "departures": 5,
         "mean_load": 7.0,
         "revenue": 1540000,
-        "trip_cost": 1050000,
+        "trip_cost": 1067500,
         "acquiring": 46200.0,
         "reserve": 30800.0,
         "tax": 46200.0,
         "acquisition": 150000,
         "support": 300000,
-        "net": -83200.0,
-        "cumulative_cash": -5255840.0
+        "net": -100700.0,
+        "cumulative_cash": -5964340.0
       },
       {
         "month": 11,
@@ -1019,14 +1030,14 @@
         "departures": 5,
         "mean_load": 7.0,
         "revenue": 1540000,
-        "trip_cost": 1050000,
+        "trip_cost": 1067500,
         "acquiring": 46200.0,
         "reserve": 30800.0,
         "tax": 46200.0,
         "acquisition": 150000,
         "support": 300000,
-        "net": -83200.0,
-        "cumulative_cash": -5339040.0
+        "net": -100700.0,
+        "cumulative_cash": -6065040.0
       },
       {
         "month": 12,
@@ -1034,14 +1045,14 @@
         "departures": 4,
         "mean_load": 7.0,
         "revenue": 1232000,
-        "trip_cost": 840000,
+        "trip_cost": 854000,
         "acquiring": 36960.0,
         "reserve": 24640.0,
         "tax": 36960.0,
         "acquisition": 120000,
         "support": 300000,
-        "net": -126560.0,
-        "cumulative_cash": -5465600.0
+        "net": -140560.0,
+        "cumulative_cash": -6205600.0
       },
       {
         "month": 13,
@@ -1049,14 +1060,14 @@
         "departures": 7,
         "mean_load": 7.0,
         "revenue": 2156000,
-        "trip_cost": 1470000,
+        "trip_cost": 1494500,
         "acquiring": 64680.0,
         "reserve": 43120.0,
         "tax": 64680.0,
         "acquisition": 210000,
         "support": 300000,
-        "net": 3520.0,
-        "cumulative_cash": -5462080.0
+        "net": -20980.0,
+        "cumulative_cash": -6226580.0
       },
       {
         "month": 14,
@@ -1064,14 +1075,14 @@
         "departures": 8,
         "mean_load": 7.0,
         "revenue": 2464000,
-        "trip_cost": 1680000,
+        "trip_cost": 1708000,
         "acquiring": 73920.0,
         "reserve": 49280.0,
         "tax": 73920.0,
         "acquisition": 240000,
         "support": 300000,
-        "net": 46880.0,
-        "cumulative_cash": -5415200.0
+        "net": 18880.0,
+        "cumulative_cash": -6207700.0
       },
       {
         "month": 15,
@@ -1079,14 +1090,14 @@
         "departures": 9,
         "mean_load": 7.0,
         "revenue": 2772000,
-        "trip_cost": 1890000,
+        "trip_cost": 1921500,
         "acquiring": 83160.0,
         "reserve": 55440.0,
         "tax": 83160.0,
         "acquisition": 270000,
         "support": 300000,
-        "net": 90240.0,
-        "cumulative_cash": -5324960.0
+        "net": 58740.0,
+        "cumulative_cash": -6148960.0
       },
       {
         "month": 16,
@@ -1094,14 +1105,14 @@
         "departures": 10,
         "mean_load": 6.7,
         "revenue": 2948000,
-        "trip_cost": 2079000,
+        "trip_cost": 2112500,
         "acquiring": 88440.0,
         "reserve": 58960.0,
         "tax": 88440.0,
         "acquisition": 285000,
         "support": 300000,
-        "net": 48160.0,
-        "cumulative_cash": -5276800.0
+        "net": 14660.0,
+        "cumulative_cash": -6134300.0
       },
       {
         "month": 17,
@@ -1109,14 +1120,14 @@
         "departures": 10,
         "mean_load": 7.0,
         "revenue": 3080000,
-        "trip_cost": 2100000,
+        "trip_cost": 2135000,
         "acquiring": 92400.0,
         "reserve": 61600.0,
         "tax": 92400.0,
         "acquisition": 300000,
         "support": 300000,
-        "net": 133600.0,
-        "cumulative_cash": -5143200.0
+        "net": 98600.0,
+        "cumulative_cash": -6035700.0
       },
       {
         "month": 18,
@@ -1124,14 +1135,14 @@
         "departures": 11,
         "mean_load": 6.7273,
         "revenue": 3256000,
-        "trip_cost": 2289000,
+        "trip_cost": 2326000,
         "acquiring": 97680.0,
         "reserve": 65120.0,
         "tax": 97680.0,
         "acquisition": 315000,
         "support": 300000,
-        "net": 91520.0,
-        "cumulative_cash": -5051680.0
+        "net": 54520.0,
+        "cumulative_cash": -5981180.0
       },
       {
         "month": 19,
@@ -1139,14 +1150,14 @@
         "departures": 11,
         "mean_load": 7.0,
         "revenue": 3388000,
-        "trip_cost": 2310000,
+        "trip_cost": 2348500,
         "acquiring": 101640.0,
         "reserve": 67760.0,
         "tax": 101640.0,
         "acquisition": 330000,
         "support": 300000,
-        "net": 176960.0,
-        "cumulative_cash": -4874720.0
+        "net": 138460.0,
+        "cumulative_cash": -5842720.0
       },
       {
         "month": 20,
@@ -1154,14 +1165,14 @@
         "departures": 12,
         "mean_load": 6.75,
         "revenue": 3564000,
-        "trip_cost": 2499000,
+        "trip_cost": 2539500,
         "acquiring": 106920.0,
         "reserve": 71280.0,
         "tax": 106920.0,
         "acquisition": 345000,
         "support": 300000,
-        "net": 134880.0,
-        "cumulative_cash": -4739840.0
+        "net": 94380.0,
+        "cumulative_cash": -5748340.0
       },
       {
         "month": 21,
@@ -1169,14 +1180,14 @@
         "departures": 12,
         "mean_load": 7.0,
         "revenue": 3696000,
-        "trip_cost": 2520000,
+        "trip_cost": 2562000,
         "acquiring": 110880.0,
         "reserve": 73920.0,
         "tax": 110880.0,
         "acquisition": 360000,
         "support": 300000,
-        "net": 220320.0,
-        "cumulative_cash": -4519520.0
+        "net": 178320.0,
+        "cumulative_cash": -5570020.0
       },
       {
         "month": 22,
@@ -1184,14 +1195,14 @@
         "departures": 13,
         "mean_load": 6.7692,
         "revenue": 3872000,
-        "trip_cost": 2709000,
+        "trip_cost": 2753000,
         "acquiring": 116160.0,
         "reserve": 77440.0,
         "tax": 116160.0,
         "acquisition": 375000,
         "support": 300000,
-        "net": 178240.0,
-        "cumulative_cash": -4341280.0
+        "net": 134240.0,
+        "cumulative_cash": -5435780.0
       },
       {
         "month": 23,
@@ -1199,14 +1210,14 @@
         "departures": 13,
         "mean_load": 6.7692,
         "revenue": 3872000,
-        "trip_cost": 2709000,
+        "trip_cost": 2753000,
         "acquiring": 116160.0,
         "reserve": 77440.0,
         "tax": 116160.0,
         "acquisition": 375000,
         "support": 300000,
-        "net": 178240.0,
-        "cumulative_cash": -4163040.0
+        "net": 134240.0,
+        "cumulative_cash": -5301540.0
       },
       {
         "month": 24,
@@ -1214,37 +1225,37 @@
         "departures": 13,
         "mean_load": 6.9231,
         "revenue": 3960000,
-        "trip_cost": 2723000,
+        "trip_cost": 2768000,
         "acquiring": 118800.0,
         "reserve": 79200.0,
         "tax": 118800.0,
         "acquisition": 384000,
         "support": 300000,
-        "net": 236200.0,
-        "cumulative_cash": -3926840.0
+        "net": 191200.0,
+        "cumulative_cash": -5110340.0
       }
     ]
   },
   "occupancy_sensitivity": [
     {
       "guests": 4,
-      "trip_cost_per_guest": 47250.0,
-      "unit_contribution": -9770.0
+      "trip_cost_per_guest": 47750.0,
+      "unit_contribution": -10270.0
     },
     {
       "guests": 6,
-      "trip_cost_per_guest": 33833.33333333333,
-      "unit_contribution": 3646.666666666668
+      "trip_cost_per_guest": 34333.33333333333,
+      "unit_contribution": 3146.666666666668
     },
     {
       "guests": 8,
-      "trip_cost_per_guest": 27125.0,
-      "unit_contribution": 10355.0
+      "trip_cost_per_guest": 27625.0,
+      "unit_contribution": 9855.0
     },
     {
       "guests": 10,
-      "trip_cost_per_guest": 23100.0,
-      "unit_contribution": 14380.0
+      "trip_cost_per_guest": 23600.0,
+      "unit_contribution": 13880.0
     }
   ]
 }

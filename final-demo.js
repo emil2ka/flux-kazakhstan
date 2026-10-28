@@ -32,7 +32,8 @@
     tr('Трансфер из Алматы и обратно', 'Return transfer from Almaty', 'Hin- und Rücktransfer ab Almaty'),
     tr('Англоязычный гид', 'English-speaking guide', 'Englischsprachiger Guide'),
     tr('Вход в национальный парк', 'National park entry', 'Nationalparkeintritt'),
-    tr('Ланч и питьевая вода', 'Lunch and drinking water', 'Mittagessen und Trinkwasser')
+    tr('Ланч и питьевая вода', 'Lunch and drinking water', 'Mittagessen und Trinkwasser'),
+    tr('Аудиогид (в составе пилота, настройка и проверка впереди)', 'Audio guide (pilot inclusion; setup and testing pending)', 'Audioguide (im Pilot enthalten; Einrichtung und Test stehen aus)')
   ];
   function cancellation(v) {
     const h = v.departure.cancelHours;

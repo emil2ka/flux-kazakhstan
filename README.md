@@ -20,7 +20,7 @@ No real charges, mail delivery, shared inventory or production database. localSt
 
 ## Model and checks
 
-Planning model: operator-assisted sales from month 2; 400 new foreign guests/40 departures in year one, 10 target guests, 12 maximum. First-year total 19,048,000 KZT; base payback month 14, -30% scenario month 21 with fewer departures and unchanged marketing. Fixed-calendar downside does not pay back in 24 months. The existing company client flow is separate. Supplier rates, demand and the tax assumption are unvalidated; full existing payroll is not allocated. See docs/economics-final.json.
+Planning model: operator-assisted sales from month 2; 400 new foreign guests/40 departures in year one, 10 target guests, 12 maximum. First-year total 19,848,000 KZT including estimated audio-guide costs; base payback month 15, -30% scenario month 22 with fewer departures and unchanged marketing. Fixed-calendar downside does not pay back in 24 months. The existing company client flow is separate. Supplier rates, demand and the tax assumption are unvalidated; full existing payroll is not allocated. See docs/economics-final.json.
 
 Run `node --test tests/proof-core.test.cjs`. Browser regression files are in tests/ and require Playwright. proof-core.js stores bookings; final-demo.js renders the pilot; receipt.js produces PDF tickets. site.js renders discovery. Russian source: locales/ru.json, rebuilt by scripts/build-locales.py.
 
