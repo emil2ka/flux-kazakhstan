@@ -279,6 +279,7 @@ dialog input,dialog select{border-radius:10px}
 @keyframes vtOut{to{opacity:0}}
 @keyframes vtIn{from{opacity:0}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){
+  @view-transition{navigation:none}
   ::view-transition-old(root),::view-transition-new(root){animation:none}
   .interlude-img{transform:none}
   .story-card:hover{transform:none}
