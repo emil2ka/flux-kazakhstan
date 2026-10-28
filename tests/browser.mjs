@@ -17,7 +17,7 @@ try {
  assert.equal(await page.evaluate(()=>typeof FluxProof.publish),'undefined');
  await page.goto(base+'booking.html?place=charyn&lang=ru',{waitUntil:'domcontentloaded'});
  assert.equal(await page.locator('#fd-guests').inputValue(),'1');
- assert.match(await page.locator('#fd-total').innerText(),/89/);
+ assert.match(await page.locator('#fd-total').innerText(),/44/);
  await page.locator('#fd-name').fill('Демо');await page.locator('#fd-email').fill('demo@example.test');
  await page.locator('#fd-consent').check();await page.locator('#fd-booking-form').evaluate(f=>f.requestSubmit());
  await page.locator('#fd-confirmation h1').waitFor();

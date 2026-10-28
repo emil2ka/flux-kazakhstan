@@ -155,7 +155,6 @@
     "Charyn Canyon · Jul 2026": "Чарынский каньон · июль 2026",
     "“Route, transfer, inclusions — one page. No WhatsApp archaeology.”": "«Маршрут, трансфер и включённые услуги — на одной странице. Не нужно искать по переписке».",
     "Turkestan · Sep 2026": "Туркестан · сентябрь 2026",
-    "“Our guide spoke German, and the meeting point was confirmed the day before.”": "«Наш гид говорил по-немецки, а место встречи подтвердили за день до выезда».",
     "Traveller notes · illustrative": "Впечатления гостей · примеры",
     "What people remember.": "Что запоминается.",
     "Illustrative reviews for the concept. Real reviews will be linked to completed trips.": "Примеры отзывов для концепции. Настоящие отзывы будут привязаны к завершённым поездкам.",
@@ -246,9 +245,7 @@
     "Start over": "Подобрать заново",
     "Illustration of a small group walking together in Charyn Canyon": "Иллюстрация небольшой группы в Чарынском каньоне",
     "Good places.<br>Better together.": "Красивые места.<br>Вместе интереснее.",
-    "Guided 2–4 day trips across Kazakhstan. One clear price.": "Туры по Казахстану на 2–4 дня с гидом. Понятная цена.",
     "Charyn Canyon · Kazakhstan": "Чарынский каньон · Казахстан",
-    "2–4 day trips": "Туры на 2–4 дня",
     "Culture & nature": "Культура и природа",
     "Small groups": "Небольшие группы",
     "Guide on every trip": "Гид в каждой поездке",
@@ -362,7 +359,15 @@
     "Demo checkout. No card is charged. Your booking is saved in this browser.": "Демооформление без списаний. Бронь сохранится в этом браузере.",
     "Your demo booking is saved in this browser. No money has been charged.": "Демобронь сохранена в этом браузере. Деньги не списаны.",
     "What language does the guide speak?": "На каком языке говорит гид?",
-    "Our tours are guided in English. The website is available in Russian, German and English.": "Гиды проводят экскурсии на английском. Сайт доступен на русском, немецком и английском."
+    "Our tours are guided in English. The website is available in Russian, German and English.": "Гиды проводят экскурсии на английском. Сайт доступен на русском, немецком и английском.",
+    "A day in Charyn Canyon.": "День в Чарынском каньоне.",
+    "One day from Almaty: the Valley of Castles, an English-speaking guide and return by evening.": "Один день из Алматы: Долина замков, англоязычный гид и возвращение вечером.",
+    "Lunch and water": "Ланч и вода",
+    "1 day": "1 день",
+    "1–2 days": "1–2 дня",
+    "Guided 1–4 day trips across Kazakhstan. One clear price.": "Туры по Казахстану на 1–4 дня. Одна понятная цена.",
+    "1–4 day trips": "Туры на 1–4 дня",
+    "“Our guide spoke English, and the meeting point was confirmed the day before.”": "«Гид говорил по-английски, а место встречи подтвердили накануне.»"
   },
   "programs": {
     "kolsai": [
@@ -385,13 +390,8 @@
     "charyn": [
       [
         "День 1",
-        "Среди скал каньона",
-        "Поездка из Алматы и прогулка по каньону."
-      ],
-      [
-        "День 2",
-        "Ещё немного природы",
-        "Дополнительные остановки и возвращение в Алматы."
+        "Из Алматы в каньон",
+        "Трансфер, прогулка с англоязычным гидом, ланч и возвращение в тот же день."
       ]
     ],
     "burabay": [

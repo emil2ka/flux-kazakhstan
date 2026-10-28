@@ -1,0 +1,23 @@
+[
+  {
+    "key": "slide03_final44",
+    "args": {
+      "referenced_image_paths": [
+        "/Users/emil2ka/Desktop/projects/saryarqa-hackathon/final/slides/FLUX-03.png"
+      ],
+      "transparent_background": false,
+      "prompt": "Use the supplied image as the exact edit target, approved FLUX slide 03. Preserve composition, dimensions 16:9, lake and hikers photograph, torn cream paper, original logo, title 'Короткий тур внутри большой поездки', timeline, labels, all typography and page number. Make ONE change only: replace coral '2–4 дня' below the timeline with exact coral text '1 день', same bold font size, centered at the same location. The product is now a one-day Charyn pilot inside a longer Kazakhstan visit. Keep 'Тур FLUX', 'Приезд', 'Возвращение', and 'Гипотеза: добавить тур к большой поездке' unchanged. No added text or shapes. Preserve every other pixel as closely as possible."
+    }
+  },
+  {
+    "key": "slide04_final44",
+    "args": {
+      "referenced_image_paths": [
+        "/Users/emil2ka/Desktop/projects/saryarqa-hackathon/final/slides/FLUX-04.png",
+        "/Users/emil2ka/Desktop/projects/saryarqa-hackathon/final/source/report-assets/screen-checkout-44000-ru.png"
+      ],
+      "transparent_background": false,
+      "prompt": "Image 1 is the exact approved FLUX slide 04 edit target. Image 2 is the actual UPDATED website checkout for faithful content insertion. Preserve the approved warm ivory paper, subtle coral contours, exact original FLUX mountain/river/sun logo, bold heading 'Тур и бронирование', large upright screenshot on the right, dark physical ticket overlapping its bottom-left edge with its same attractive angle/shadow, coral 04 bottom-right. Narrow content update only, not redesign. Update ALL prices and trip details: Charyn is now ONE DAY, on 7 November 2026, price 44 000 ₸ per person. Foreground ticket text verbatim: 'Чарын'; '1 день · 7 ноября'; '44 000 ₸'; 'за человека'; inclusions 'Трансфер · ланч · гид · парк'; small 'Демовыезд'. Remove every reference to overnight, two days, 7–8 November, 89 000 or 55 000. Screenshot must faithfully match supplied image 2: 7 ноября 2026, 44 000 ₸, one traveller by default, English guide, first traveller name and booking contact email, lunch/water instead of night. Where visible, totals: 1 × 44 000 ₸, total 44 000 ₸, 20% 8 800 ₸, balance 35 200 ₸. Navigation only Тур and RU / DE / EN. Preserve clean precise complete Russian lettering. Do not add captions, prepayment outside screenshot, AI translation, Starlink, TripProof, operator checking, fake QR or new elements. Keep exact layout/brand and all unedited photography."
+    }
+  }
+]

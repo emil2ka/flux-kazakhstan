@@ -32,7 +32,7 @@
       intro:people.length>1 ? t('Одна бронь, отдельный именной билет для каждого туриста.','One booking, a named ticket for every traveller.','Eine Buchung, ein persönliches Ticket pro Person.') : t('Детали поездки и принятые условия — в одном билете.','Your trip details and accepted terms, together in one ticket.','Reisedetails und akzeptierte Bedingungen in einem Ticket.'),
       trip:t('Чарын','Charyn Canyon','Charyn-Canyon'),
       from:t('Из Алматы','From Almaty','Ab Almaty'),
-      duration:t('2 дня · 1 ночь','2 days · 1 night','2 Tage · 1 Nacht'),
+      duration:d.start===d.end ? t('1 день · без ночёвки','1 day · no overnight stay','1 Tag · ohne Übernachtung') : t('2 дня · 1 ночь','2 days · 1 night','2 Tage · 1 Nacht'),
       photo:t('Чарынский каньон','Charyn Canyon','Charyn-Canyon'),
       date:t('Даты поездки','Travel dates','Reisedaten'),
       guests:t('Путешественников','Travellers','Reisende'),
@@ -69,7 +69,7 @@
       d.accommodation === 'included' && t('Одна ночь в гостевом доме','One night in a guesthouse','Eine Nacht in einer Pension'),
       b.guideLanguage==='en' ? t('Англоязычный гид','English-speaking guide','Englischsprachiger Guide') : t('Гид на языке брони','Guide in the booked language','Guide in der gebuchten Sprache'),
       d.park === 'included' && t('Вход в национальный парк','National park entry','Nationalparkeintritt'),
-      d.meals === 'included' && t('Два обеда, ужин и завтрак','Two lunches, dinner and breakfast','Zwei Mittagessen, Abendessen und Frühstück'),
+      d.meals === 'included' && (d.mealPlan === 'lunch' ? t('Ланч и питьевая вода','Lunch and drinking water','Mittagessen und Trinkwasser') : t('Два обеда, ужин и завтрак','Two lunches, dinner and breakfast','Zwei Mittagessen, Abendessen und Frühstück')),
     ].filter(Boolean);
     const cancellation = t(
       `Отмена не позднее чем за ${d.cancelHours} часов до выезда: возврат предоплаты целиком. Позже предоплата не возвращается. Если выезд отменяет оператор, предоплата возвращается целиком. Запрос отмены ещё не означает выполненный возврат. В демо денег не списывают. Условия реального пилота должен утвердить оператор.`,

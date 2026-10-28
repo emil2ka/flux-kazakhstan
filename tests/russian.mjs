@@ -31,7 +31,7 @@ try {
  await page.locator('[data-lang="ru"]').click();await page.waitForURL(/lang=ru/);
  await page.goto(base+'index.html',{waitUntil:'domcontentloaded'});
  assert.equal(await page.locator('html').getAttribute('lang'),'ru');
- await page.locator('[data-finder-key="days"] [data-value="2"]').click();
+ await page.locator('[data-finder-key="days"] [data-value="1"]').click();
  await page.locator('[data-finder-key="theme"] [data-value="nature"]').click();
  await page.locator('[data-finder-key="when"] [data-value="2026-11"]').click();
  assert((await page.locator('#finder-results').innerText()).includes('Посмотреть даты'));

@@ -44,7 +44,7 @@ try {
   // Change the live offer after acceptance. Both the page and PDF must retain v1.
   await page.evaluate(()=>{const state=FluxProof.read(),old=FluxProof.published();const next={...old,id:'CH-2026-11-07-v2',number:2,departure:{...old.departure,price:69000,cancelHours:72}};state.versions.push(next);state.activeVersion=next.id;localStorage.setItem(FluxProof.KEY,JSON.stringify(state));});
   await page.reload({waitUntil:'domcontentloaded'});await page.locator('#fd-download').waitFor();
-  assert.equal(await page.evaluate(()=>FluxReceipt.model(FluxProof.read().bookings[0],document.documentElement.lang).b.total),178000);
+  assert.equal(await page.evaluate(()=>FluxReceipt.model(FluxProof.read().bookings[0],document.documentElement.lang).b.total),88000);
   await page.locator('.fd-saved-terms summary').click();
   assert.match(await page.locator('.fd-saved-grid').innerText(),/48/);
   await page.locator('.fd-saved-terms summary').click();
@@ -56,7 +56,7 @@ try {
   await download(page,lang+'.pdf');
   await download(page,lang+'-person-1.pdf','[data-ticket-download="0"]');
   await download(page,lang+'-person-2.pdf','[data-ticket-download="1"]');
-  assert.deepEqual(await page.evaluate(()=>[0,1].map(i=>{const r=FluxReceipt.model(FluxProof.read().bookings[0],document.documentElement.lang,i);return [r.b.total,r.b.deposit,r.b.balance,r.b.guests]})),[[89000,17800,71200,1],[89000,17800,71200,1]]);
+  assert.deepEqual(await page.evaluate(()=>[0,1].map(i=>{const r=FluxReceipt.model(FluxProof.read().bookings[0],document.documentElement.lang,i);return [r.b.total,r.b.deposit,r.b.balance,r.b.guests]})),[[44000,8800,35200,1],[44000,8800,35200,1]]);
   const old=await page.evaluate(()=>FluxProof.read().bookings[0]);
   assert.equal(old.termsSnapshot.number,1);assert.equal(old.termsSnapshot.departure.cancelHours,48);
   const target=lang==='de'?'en':'de';

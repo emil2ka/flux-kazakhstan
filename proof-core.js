@@ -6,13 +6,13 @@
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   'use strict';
   const KEY = 'flux-final-demo-v1';
-  const REVISION = 'pilot-89000-en-20261028';
-  const VERSION_ID = 'CH-2026-11-07-89000-en-v1';
+  const REVISION = 'pilot-44000-day-en-400-20261028';
+  const VERSION_ID = 'CH-2026-11-07-44000-day-en-400-v1';
   const clone = value => JSON.parse(JSON.stringify(value));
   const DEFAULT = {
-    id: 'charyn-2026-11-07', tour: 'charyn', start: '2026-11-07', end: '2026-11-08',
-    price: 89000, capacity: 8, languages: ['en'], transfer: 'included',
-    transferExtra: false, accommodation: 'included', park: 'included', meals: 'included',
+    id: 'charyn-2026-11-07', tour: 'charyn', start: '2026-11-07', end: '2026-11-07', days: 1,
+    price: 44000, capacity: 12, languages: ['en'], transfer: 'included',
+    transferExtra: false, accommodation: 'not_included', park: 'included', meals: 'included', mealPlan: 'lunch', water: 'included',
     cancelHours: 48, meeting: 'Almaty', currency: 'KZT'
   };
   const initial = () => ({
