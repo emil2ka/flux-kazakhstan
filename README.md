@@ -1,5 +1,7 @@
 # FLUX · Finalist prototype
 
+[Что изменено к финалу: сайт, репозитории и документы](docs/FINAL-CHANGES.ru.md).
+
 Kazakhstan short-trip concept for German-speaking visitors. The DE/EN destination site is preserved; the complete Charyn pilot and operator workflow also have a Russian view for the final pitch.
 
 Live Russian start: https://flux-kazakhstan.vercel.app/demo.html?lang=ru
