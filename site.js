@@ -21,7 +21,7 @@ altyn:{name:pick('Altyn-Emel','Altyn-Emel'),region:pick('Dunes & steppe','Dünen
 if(ru)for(const [key,tour] of Object.entries(tours)){tour.origin=window.FluxLocale.cities[tour.origin]||tour.origin;tour.program=window.FluxLocale.programs[key];}
 const tr={home:pick('Home','Startseite'),tours:pick('Trips','Reisen'),how:pick('How it works','So funktioniert es'),operators:pick('For operators','Für Veranstalter'),notes:pick('Journal','Journal'),faq:pick('Good to know','Gut zu wissen'),choose:pick('All trips','Alle Reisen'),find:pick('Find a trip','Reise finden'),details:pick('Explore trip','Reise entdecken'),days:pick('days','Tage'),plan:pick('Build my trip plan','Reiseplan erstellen'),back:pick('All trips','Alle Reisen'),price:pick('Route concept','Routenkonzept'),start:pick('Starts in Almaty','Start in Almaty'),included:pick('Included','Inklusive'),optional:pick('Optional extras','Optionale Extras'),pending:pick('Needs confirmation','Zu bestätigen'),demo:pick('Demo','Demo')};
 const duration=t=>t.days+' '+(ru?'дня':pick('days','Tage'));
-const departure=t=>pick('From ','Ab ')+t.origin;
+const departure=t=>ru?'Из '+({'Алматы':'Алматы','Астана':'Астаны','Туркестан':'Туркестана'}[t.origin]||t.origin):pick('From ','Ab ')+t.origin;
 const image=(src,alt,cls='',eager=false)=>`<img class="${cls}" src="assets/${src}.webp" alt="${alt}" ${eager?'fetchpriority="high"':'loading="lazy"'} decoding="async">`;
 const photo=(t,cls='',eager=false)=>image('field-'+t.img,t.alt,cls,eager);
 const arrow='<span aria-hidden="true">→</span>';
