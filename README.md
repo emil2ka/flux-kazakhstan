@@ -17,7 +17,7 @@ Operator: https://flux-kazakhstan.vercel.app/operator.html?lang=ru
 
 Confirmation links use a local booking reference. Reloading or switching RU / DE / EN preserves the confirmation in the same browser. Operator booking references open the saved confirmation. A cancellation request persists on reload and remains a request, not a completed refund.
 
-The PDF is generated locally on demand, including embedded fonts for Cyrillic, German and the tenge symbol. It does not send contact information to a server. `vendor/DEPENDENCIES.json` records the pinned jsPDF build and Adobe font revisions; MIT/OFL licenses are included. No CDN or internet connection is needed when the site is served locally.
+The PDF uses two A4 landscape pages: a photo travel pass with a dark tear-off stub, then saved terms in two columns with a separate contact strip. The web confirmation keeps its existing layout. The PDF is generated locally on demand, including embedded fonts for Cyrillic, German and the tenge symbol. It does not send contact information to a server. `vendor/DEPENDENCIES.json` records the pinned jsPDF build and Adobe font revisions; MIT/OFL licenses are included. No CDN or internet connection is needed when the site is served locally.
 
 Pilot: Charyn, 7-8 November 2026, 55,000 KZT per person, eight guests maximum. Data are illustrative. Other routes remain concepts; their checkout directs to this pilot.
 

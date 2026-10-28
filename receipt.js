@@ -108,7 +108,7 @@
   function assets() {
     if(!assetPromise)assetPromise=Promise.all([
       fileBase64('fonts/source-sans3-regular.ttf'),fileBase64('fonts/source-sans3-semibold.ttf'),
-      fileBase64('fonts/source-serif4-semibold.ttf'),picture('assets/field-charyn.webp',1400,490),
+      fileBase64('fonts/source-serif4-semibold.ttf'),picture('assets/field-charyn.webp',900,1395),
       picture('assets/logo-flux.png',175,159,'image/png'),
     ]).catch(e=>{assetPromise=null;throw e;});
     return assetPromise;
@@ -116,69 +116,107 @@
   async function pdf(booking,lang) {
     const r=model(booking,lang),{b,labels:l}=r;
     const [PDF,files]=await Promise.all([loadSDK(),assets()]);
-    const doc=new PDF({unit:'pt',format:'a4',compress:true,putOnlyUsedFonts:true});
+    const doc=new PDF({unit:'pt',format:'a4',orientation:'landscape',compress:true,putOnlyUsedFonts:true});
     const names=[['source-sans3-regular.ttf','FluxSans','normal'],['source-sans3-semibold.ttf','FluxSans','bold'],['source-serif4-semibold.ttf','FluxSerif','normal']];
     names.forEach(([file,font,weight],i)=>{doc.addFileToVFS(file,files[i]);doc.addFont(file,font,weight);});
     doc.setLanguage(r.lang);doc.setProperties({title:'FLUX / '+b.ref,subject:r.state,author:'FLUX / Saryarqa Routes'});
-    const ink='#20251F',muted='#687065',coral='#EC7658',cream='#F5F0E6',white='#FFFFFF',line='#DBDFD5';
-    const width=doc.internal.pageSize.getWidth(),height=doc.internal.pageSize.getHeight(),left=40,span=width-80;
+    const ink='#202B25',muted='#70766B',coral='#EE795B',paper='#FFFDF8',outer='#EEE9DF',line='#DADDD3';
+    const width=doc.internal.pageSize.getWidth(),height=doc.internal.pageSize.getHeight();
+    const tr=(ru,en,de)=>r.lang==='ru'?ru:r.lang==='de'?de:en;
     function text(value,x,y,size=11,color=ink,font='FluxSans',weight='normal',options={}) {
       doc.setFont(font,weight);doc.setFontSize(size);doc.setTextColor(color);doc.text(clean(value),x,y,options);
     }
-    function para(value,x,y,maxWidth,size=11,color=ink,font='FluxSans',weight='normal') {
+    function para(value,x,y,maxWidth,size=11,color=ink,font='FluxSans',weight='normal',factor=1.35) {
       doc.setFont(font,weight);doc.setFontSize(size);doc.setTextColor(color);
       const rows=doc.splitTextToSize(clean(value),maxWidth);
-      doc.text(rows,x,y,{lineHeightFactor:1.4});return y+rows.length*size*1.4;
+      doc.text(rows,x,y,{lineHeightFactor:factor});return y+rows.length*size*factor;
     }
     function rect(x,y,w,h,color,radius=0) {doc.setFillColor(color);if(radius)doc.roundedRect(x,y,w,h,radius,radius,'F');else doc.rect(x,y,w,h,'F');}
-    function header() {
-      rect(0,0,width,height,white);doc.addImage(files[4],'PNG',left,26,35,32);
-      text('FLUX',left+46,51,23,ink,'FluxSans','bold');text(b.ref,width-left,48,11,muted,'FluxSans','bold',{align:'right'});
-    }
-    function footer(n) {
-      doc.setDrawColor(line);doc.setLineWidth(.6);doc.line(left,height-57,width-left,height-57);
-      text('FLUX / '+b.ref,left,height-37,9,muted);text(n+' / 2',width-left,height-37,9,muted,'FluxSans','normal',{align:'right'});
-    }
-    function field(label,value,x,y,w) {text(label,x,y,9,muted,'FluxSans','bold');return para(value,x,y+19,w,12);}
-    header();text(r.state,left,88,10,muted,'FluxSans','bold');
-    doc.addImage(files[3],'JPEG',left,108,span,170);
-    text(l.trip,left+16,317,29,ink,'FluxSerif');text(l.duration,width-left-16,315,11,muted,'FluxSans','normal',{align:'right'});
-    let y=para(l.guest+': '+b.name,left+16,340,span-32,12);
-    y+=16;
-    const third=(span-48)/3;
-    const end=Math.max(field(l.date,r.dates,left+16,y,third),field(l.guests,b.guests,left+16+third+8,y,third-8),field(l.guide,r.guide,left+16+2*(third+8),y,third-8));
-    y=end+20;
-    rect(left,y,span,112,ink,12);
-    text(l.total,left+16,y+24,10,cream);text(r.pdfMoney(b.total),left+16,y+61,31,white,'FluxSans','bold');
-    text(l.charged,left+16,y+91,11,cream);
-    text(l.deposit,left+span/2+20,y+26,9,cream);text(r.pdfMoney(b.deposit),left+span/2+20,y+48,15,white,'FluxSans','bold');
-    text(l.balance,left+span/2+20,y+76,9,cream);text(r.pdfMoney(b.balance),left+span/2+20,y+98,15,white,'FluxSans','bold');
-    y+=132;
-    field(l.departure,r.city,left+16,y,span/2-30);field(l.version,String(b.termsSnapshot.number),left+span/2+20,y,span/2-30);
-    y+=59;
-    const noticeHeight=Math.max(54,doc.splitTextToSize(l.demo,span-32).length*16+24);
-    rect(left,y,span,noticeHeight,cream,9);para(l.demo,left+16,y+22,span-32,11);
-    y+=noticeHeight+20;
-    para(l.accepted+': '+r.accepted+' (Almaty)',left+16,y,span-32,10,muted);
-    if(y+25>height-70)throw new Error('pdf_layout');
-    footer(1);
+    function rule(x1,y1,x2,y2,color=line,dash=[]) {doc.setDrawColor(color);doc.setLineWidth(.65);doc.setLineDashPattern(dash,0);doc.line(x1,y1,x2,y2);doc.setLineDashPattern([],0);}
+    function field(label,value,x,y,w,size=12) {text(label,x,y,9,muted);return para(value,x,y+19,w,size);}
+    function background(){rect(0,0,width,height,outer);}
+    function brand(x,y) {doc.addImage(files[4],'PNG',x,y-25,30,27);text('FLUX',x+40,y,21,ink,'FluxSans','bold');}
+    const x=28,y=34,w=width-56,h=height-115,photoW=240,stubW=142;
+    const contentX=x+photoW,stubX=x+w-stubW,pad=24,cx=contentX+pad,cw=stubX-cx-pad;
+    background();
+    // The ticket silhouette and three materials: canyon, warm paper, dark tear-off stub.
+    rect(x+2,y+4,w,h,'#E3DED4',16);rect(x,y,w,h,paper,16);
+    doc.saveGraphicsState();doc.roundedRect(x,y,w,h,16,16,null);doc.clip();doc.discardPath();
+    doc.addImage(files[3],'JPEG',x,y,photoW,h-108);
+    rect(x,y+h-108,photoW,108,ink);
+    rect(stubX,y,stubW,h,ink);
+    doc.restoreGraphicsState();
+    text(tr('КАЗАХСТАН','KAZAKHSTAN','KASACHSTAN'),x+22,y+h-79,9,'#CAD1C5','FluxSans','bold');
+    text(l.from,x+22,y+h-43,25,paper,'FluxSerif');
+    text(l.duration,x+22,y+h-22,11,'#D4DACA');
+    // Actual project logo; no invented verification marks or decorative QR codes.
+    brand(cx,79);
+    rect(stubX-120,60,96,23,'#FBE8DE',12);
+    text(tr('ДЕМО-БИЛЕТ','DEMO TICKET','DEMO-TICKET'),stubX-72,75,9,'#A74C36','FluxSans','bold',{align:'center'});
+    text(tr('БИЛЕТ НА ПОЕЗДКУ','TRAVEL PASS','REISETICKET'),cx,111,9,muted,'FluxSans','bold');
+    text(l.trip,cx,149,34,ink,'FluxSerif');
+    text(l.guest,cx,177,9,muted);
+    const nameEnd=para(b.name,cx,198,cw,13,ink,'FluxSans','bold',1.25);
+    if(nameEnd>265)throw new Error('pdf_layout');
+    const half=(cw-24)/2;
+    field(l.date,r.dates,cx,271,half,12);
+    field(l.guide,r.guide,cx+half+24,271,half,12);
+    rule(cx,329,stubX-pad,329);
+    text(l.total,cx,352,10,muted);
+    text(r.pdfMoney(b.total),cx,392,32,ink,'FluxSans','bold');
+    field(l.deposit,r.pdfMoney(b.deposit),cx,420,half,13);
+    field(l.balance,r.pdfMoney(b.balance),cx+half+24,420,half,13);
+    text(l.charged,cx,481,10,'#4E6650','FluxSans','bold');
+    // A useful stub: reference, travel days, passenger count and accepted version.
+    const mid=stubX+stubW/2,locale={ru:'ru-RU',en:'en-GB',de:'de-DE'}[r.lang];
+    const start=new Date(b.termsSnapshot.departure.start+'T12:00:00Z');
+    const end=new Date(b.termsSnapshot.departure.end+'T12:00:00Z');
+    text(l.ref,mid,69,8.5,'#CDD5C8','FluxSans','normal',{align:'center'});
+    text(b.ref,mid,94,16,paper,'FluxSans','bold',{align:'center'});
+    rule(stubX+18,115,x+w-18,115,'#526052');
+    text(l.date,mid,144,8.5,'#CDD5C8','FluxSans','normal',{align:'center'});
+    text(String(start.getUTCDate()).padStart(2,'0')+' / '+String(end.getUTCDate()).padStart(2,'0'),mid,181,29,paper,'FluxSerif','normal',{align:'center'});
+    text(new Intl.DateTimeFormat(locale,{month:'short',year:'numeric',timeZone:'UTC'}).format(start),mid,204,10,'#D6DDCF','FluxSans','normal',{align:'center'});
+    text(l.guests,mid,254,8.5,'#CDD5C8','FluxSans','normal',{align:'center'});
+    doc.setDrawColor('#6E7A68');doc.setLineWidth(.7);doc.circle(mid,297,31,'S');
+    text(b.guests,mid,309,35,paper,'FluxSans','bold',{align:'center'});
+    rule(stubX+18,355,x+w-18,355,'#526052');
+    text(l.version,mid,388,8.5,'#CDD5C8','FluxSans','normal',{align:'center'});
+    text('V.'+String(b.termsSnapshot.number).padStart(2,'0'),mid,424,26,paper,'FluxSerif','normal',{align:'center'});
+    text('FLUX / '+tr('ЧАРЫН','CHARYN','CHARYN'),mid,479,8.5,'#CDD5C8','FluxSans','bold',{align:'center'});
+    rule(stubX,y+13,stubX,y+h-13,'#9FA796',[2.5,4]);
+    doc.setFillColor(outer);doc.circle(stubX,y,11,'F');doc.circle(stubX,y+h,11,'F');
+    const foot=para(r.state+'. '+l.demo,28,y+h+26,width-56,10,muted);
+    if(foot>height-22)throw new Error('pdf_layout');
+    text('01 / 02',width-28,height-16,8.5,muted,'FluxSans','normal',{align:'right'});
 
-    doc.addPage();header();
-    text(l.details,left,108,28,ink,'FluxSerif');
-    y=para(l.termsIntro,left,133,span,11,muted)+20;
-    rect(left,y-12,span,53,cream,8);
-    text(l.version+' '+b.termsSnapshot.number,left+14,y+6,11,ink,'FluxSans','bold');
-    text(b.termsVersionId,left+14,y+25,10,muted);
-    y+=70;
-    text(l.included,left,y,15,ink,'FluxSans','bold');y+=25;
-    for(const item of r.inclusions){doc.setFillColor(coral);doc.circle(left+3,y-4,2,'F');y=para(item,left+16,y,span-16,12)+7;}
-    y+=9;text(l.excluded,left,y,15,ink,'FluxSans','bold');y=para(l.extras,left,y+23,span,12)+20;
-    text(l.cancellation,left,y,15,ink,'FluxSans','bold');y=para(r.cancellation,left,y+23,span,12)+21;
-    text(l.guest,left,y,10,muted,'FluxSans','bold');y=para(b.name,left,y+18,span,11)+9;
-    text(l.email,left,y,10,muted,'FluxSans','bold');y=para(b.email,left,y+18,span,11)+17;
-    y=para(l.termsFooter,left,y,span,10,muted);
-    if(y>height-70)throw new Error('pdf_layout');
-    footer(2);return doc.output('blob');
+    // Matching landscape reverse: readable two-column terms and a separate contact strip.
+    doc.addPage('a4','landscape');background();
+    rect(28,28,width-56,height-71,paper,16);
+    brand(50,69);text(b.ref,width-50,65,11,muted,'FluxSans','bold',{align:'right'});
+    text(l.details,50,119,30,ink,'FluxSerif');
+    const introEnd=para(l.termsIntro,50,143,width-100,11,muted);
+    if(introEnd>180)throw new Error('pdf_layout');
+    const colW=(width-126)/2,rx=50+colW+26;
+    text(l.included,50,201,14,ink,'FluxSans','bold');
+    let ly=226;
+    for(const item of r.inclusions) {doc.setFillColor(coral);doc.circle(53,ly-4,2,'F');ly=para(item,65,ly,colW-15,11)+7;}
+    ly+=12;text(l.excluded,50,ly,14,ink,'FluxSans','bold');
+    ly=para(l.extras,50,ly+23,colW,11);
+    text(l.cancellation,rx,201,14,ink,'FluxSans','bold');
+    let ry=para(r.cancellation,rx,226,colW,11);
+    ry+=18;text(l.version+' '+b.termsSnapshot.number,rx,ry,10,muted,'FluxSans','bold');
+    ry=para(b.termsVersionId,rx,ry+17,colW,10,muted)+10;
+    ry=para(l.termsFooter,rx,ry,colW,9.5,muted);
+    const stripY=Math.max(435,ly+16,ry+16);
+    if(stripY>448)throw new Error('pdf_layout');
+    rect(50,stripY,width-100,85,'#F0EEE4',9);
+    field(l.guest,b.name,64,stripY+18,colW-24,10.5);
+    const emailEnd=field(l.email,b.email,rx+12,stripY+18,colW-24,10.5);
+    if(emailEnd>stripY+82)throw new Error('pdf_layout');
+    para(l.accepted+': '+r.accepted+' (Almaty)',28,height-31,width-120,9,muted);
+    text('02 / 02',width-28,height-16,8.5,muted,'FluxSans','normal',{align:'right'});
+    return doc.output('blob');
   }
   async function download(booking,lang) {
     const blob=await pdf(booking,lang);
