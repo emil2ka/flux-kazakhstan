@@ -188,7 +188,9 @@ if(window.FluxDemo?.owned) return;
     const strip = document.querySelector('.fact-strip');
     if(!strip || document.querySelector('.wow-band')) return;
 
-    const words = ['Kolsai','Charyn','Burabay','Turkestan','Altyn-Emel','Balkhash','Astana','Almaty'];
+    const language=document.documentElement.lang;
+    const words=language==='ru'?['Кольсай','Чарын','Бурабай','Туркестан','Алтын-Эмель','Балхаш','Астана','Алматы']:['Kolsai','Charyn','Burabay','Turkestan','Altyn-Emel','Balkhash','Astana','Almaty'];
+    const label=(ru,de,en)=>language==='ru'?ru:language==='de'?de:en;
     const one = words.map(w => `<span>${w}</span><i></i>`).join('');
 
     const el = document.createElement('section');
@@ -199,9 +201,9 @@ if(window.FluxDemo?.owned) return;
         `<div class="wow-marquee-track">${one}</div>` +
       `</div>` +
       `<div class="wrap wow-stats">` +
-        `<div class="wow-stat"><b data-count="5">0</b><span>Journeys · Reisen</span></div>` +
-        `<div class="wow-stat"><b data-count="7">0</b><span>Days outside · Tage draußen</span></div>` +
-        `<div class="wow-stat"><b data-count="12">0</b><span>Max group · Max. Gruppe</span></div>` +
+        `<div class="wow-stat"><b data-count="5">0</b><span>${label('Маршрутов','Reisen','Journeys')}</span></div>` +
+        `<div class="wow-stat"><b data-count="4">0</b><span>${label('Дня в путешествии','Tage draußen','Days outside')}</span></div>` +
+        `<div class="wow-stat"><b data-count="8">0</b><span>${label('Человек в группе','Max. Gruppe','Max group')}</span></div>` +
       `</div>`;
     strip.after(el);
 
@@ -309,10 +311,11 @@ if(window.FluxDemo?.owned) return;
   /* ---------- back to top with progress ring ---------- */
   function toTop(){
     if(document.querySelector('.to-top')) return;
-    const de = new URLSearchParams(location.search).get('lang') === 'de';
+    const locale=document.documentElement.lang;
+    const de=locale==='de',ru=locale==='ru';
     const b = document.createElement('button');
     b.className = 'to-top'; b.type = 'button';
-    b.setAttribute('aria-label', de ? 'Nach oben' : 'Back to top');
+    b.setAttribute('aria-label', ru?'Наверх':de?'Nach oben':'Back to top');
     b.innerHTML = '<svg viewBox="0 0 40 40" aria-hidden="true"><circle class="tt-bg" cx="20" cy="20" r="17"/><circle class="tt-fg" cx="20" cy="20" r="17"/></svg><span aria-hidden="true">↑</span>';
     document.body.append(b);
     const fg = b.querySelector('.tt-fg');
@@ -333,22 +336,23 @@ if(window.FluxDemo?.owned) return;
   /* ---------- command palette (Ctrl/⌘ + K) ---------- */
   function palette(){
     if(document.getElementById('cmdk')) return;
-    const de = new URLSearchParams(location.search).get('lang') === 'de';
-    const T = (en, deTxt) => de ? deTxt : en;
-    const href = (page, extra) => page + '?lang=' + (de ? 'de' : 'en') + (extra || '');
+    const locale=document.documentElement.lang;
+    const de=locale==='de',ru=locale==='ru';
+    const T=(en,deTxt)=>ru?(window.FluxLocale.strings[en]||en):de?deTxt:en;
+    const href = (page, extra) => page + '?lang=' + locale + (extra || '');
 
     const items = [
       {g: T('Destinations','Ziele'), t: T('Kolsai Lakes','Kolsai-Seen'),      go:() => location.href = href('tours.html','&place=kolsai')},
       {g: T('Destinations','Ziele'), t: T('Charyn Canyon','Charyn-Canyon'),   go:() => location.href = href('tours.html','&place=charyn')},
-      {g: T('Destinations','Ziele'), t: 'Burabay',                            go:() => location.href = href('tours.html','&place=burabay')},
-      {g: T('Destinations','Ziele'), t: 'Turkestan',                          go:() => location.href = href('tours.html','&place=turkestan')},
-      {g: T('Destinations','Ziele'), t: 'Altyn-Emel',                         go:() => location.href = href('tours.html','&place=altyn')},
+      {g: T('Destinations','Ziele'), t: T('Burabay','Burabay'),                            go:() => location.href = href('tours.html','&place=burabay')},
+      {g: T('Destinations','Ziele'), t: T('Turkestan','Turkestan'),                          go:() => location.href = href('tours.html','&place=turkestan')},
+      {g: T('Destinations','Ziele'), t: T('Altyn-Emel','Altyn-Emel'),                         go:() => location.href = href('tours.html','&place=altyn')},
       {g: T('Pages','Seiten'), t: T('All trips','Alle Reisen'),               go:() => location.href = href('tours.html')},
       {g: T('Pages','Seiten'), t: T('Home','Startseite'),                     go:() => location.href = href('index.html')},
       {g: T('Pages','Seiten'), t: T('Journal','Reisehinweise'),               go:() => location.href = href('journal.html')},
       {g: T('View','Ansicht'), t: T('Open the map','Karte öffnen'),           go:() => { const m = document.querySelector('.map-section'); if(m) m.scrollIntoView({behavior: reduce?'auto':'smooth'}); }},
       {g: T('View','Ansicht'), t: T('Back to top','Nach oben'),               go:() => window.scrollTo({top:0, behavior: reduce?'auto':'smooth'})},
-      {g: T('Language','Sprache'), t: de ? 'English' : 'Deutsch',             go:() => { location.href = location.pathname + '?lang=' + (de?'en':'de'); }}
+      ...['ru','de','en'].filter(l=>l!==locale).map(l=>({g:T('Language','Sprache'),t:ru?({ru:'Русский',de:'Немецкий',en:'Английский'}[l]):({ru:'Русский',de:'Deutsch',en:'English'}[l]),go:()=>{const u=new URL(location.href);u.searchParams.set('lang',l);location.href=u.href;}}))
     ];
 
     const back = document.createElement('div'); back.className = 'cmdk-backdrop';

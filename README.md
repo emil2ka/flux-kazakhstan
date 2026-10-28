@@ -2,7 +2,7 @@
 
 [Что изменено к финалу: сайт, репозитории и документы](docs/FINAL-CHANGES.ru.md).
 
-Kazakhstan short-trip concept for German-speaking visitors. The DE/EN destination site is preserved; the complete Charyn pilot and operator workflow also have a Russian view for the final pitch.
+Kazakhstan short-trip concept for German-speaking visitors. The full website is available in Russian, German and English: home, catalog, all five routes, journal, finder and operator workflow. The RU / DE / EN switch preserves the route and chosen language.
 
 Live Russian start: https://flux-kazakhstan.vercel.app/demo.html?lang=ru
 
@@ -44,3 +44,7 @@ tests/browser.mjs requires Playwright with Chromium available. FLUX_NODE_MODULES
 ## Source
 
 proof-core.js holds the tested version/booking model. final-demo.js and final-demo.css render the pilot; site.js and enhance.js render the original destination pages. Images/fonts are local. docs/AI-USE.md records AI use and links to prompts. The 55,000 KZT financial model includes twelve months of support; historical Stage 1 figures should not be mixed with it.
+
+## Russian locale
+
+Edit locales/ru.json and run python3 scripts/build-locales.py to regenerate the offline i18n-ru.js. Full Russian checks: node tests/russian.mjs (Playwright required). The dictionary covers 362 interface strings and all five itineraries.
